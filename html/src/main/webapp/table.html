@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+      <head>
+            <meta charset="UTF-8">
+            <title>HTML</title>
+            <style>
+                    /*css*/
+                    table, td, th{
+                            border: 1px solid darkgray;}
+            </style>
+        </head>
+        
+    <body>
+            <h1>HTML Table</h1>
+            <!-- 테이블 관련 태그: 
+            <table></table> 테이블 시작, 끝
+            <caption></caption>: 테이블의 제목
+            html5부터!
+            <thead>: table header.
+            <tbody>: table body. <- 테이블이 있으면 바디가 있어야 함. 
+            <tfoot>: table footer.  <- 필수아님
+            
+            <tr>: table row(행) <- 굵은 폰트  데이터들..  tr td는 기본이다!!!!!!!
+            
+            <td>: table data. 셀 데이터 <- 일반 폰트 
+            <th>: table cell header. 행 또는 열의 이름을 표시 <- 컬럼의 제목 
+            
+            row를 만들고 그 안 td를 만들어줘야함. 이게 쌓여서 table이 됨. 
+            똑같은 tr이지만, 데이터, 컬럼이 될 수도. 
+            
+            컬럼과 컬럼을 합쳐주는 것. 행을 합치는게 아님! colspan + 합쳐주는 셀의 개수. 
+            숫자도 반드시 따옴표로 묶어줘야함(value)
+            
+            -->
+            
+            <table> 
+                <caption>Front-End 시험성적</caption>
+                   <thead>
+                        <tr>
+                             <th>번호</th>
+                             <th>HTML</th>
+                             <th>CSS</th>
+                             <th>JavaScript</th>
+                        </tr>                             
+                   </thead>
+                    <tbody>
+                            <tr>
+                             <td>1</td>
+                             <td>100</td>
+                             <td>100</td>
+                             <td>100</td>
+                        </tr>    
+                        
+                                  <tr>
+                             <td>2</td>
+                             <td>100</td>
+                             <td>90</td>
+                             <td>100</td>
+                        </tr>    
+                        
+                                    <tr>
+                             <td>3</td>
+                             <td>100</td>
+                             <td>100</td>
+                             <td>80</td>
+                        </tr>    
+                    </tbody>
+                     <tfoot>
+                        <tr>
+                             <td>합계</td>
+                             <td>300</td>
+                             <td>290</td>
+                             <td>280</td>
+                        </tr>    
+                     
+                    </tfoot>
+            </table>
+            <table>
+                <caption> 회원정보
+                </caption>
+                        <thead>
+                             <tr>  <!--  Row가 있어야 td나 th를 넣을 수 있음  
+                             head, body를 나눌 수 없으면 전체를 테이블 바디로 묶는 방법뿐! -->
+                              <th>아이디</th>
+                              <th>비밀번호</th>
+                              <th>이메일</th>
+                             </tr>
+                            
+                        </thead>
+                              <tbody>
+                                     <tr>  
+                                           <td>d</td>
+                                            <td>d</td>
+                                             <td>d</td>
+                                    </tr> 
+                                
+                                        <tr>  
+                                           <td>d</td>
+                                            <td>d</td>
+                                             <td>d</td>
+                                       </tr> 
+                                    
+                                       <tr>  
+                                           <td>d</td>
+                                            <td>d</td>
+                                             <td>d</td>
+                                        </tr> 
+                          </tbody> 
+            </table>
+           
+            <table>  
+                        <thead>
+                             <tr>  
+                                   <th>이름</th>
+                                   <th colspan = "2">전화번호</th>  <!--  차지하는 영역이 서로 달라서 크기가 달라짐 -->
+                             </tr>
+                            
+                        </thead>
+                              <tbody>
+                                     <tr>  
+                                           <td>홍길동</td>
+                                            <td>010-1234-5678</td>
+                                             <td>02-1234-5678</td>
+                                    </tr> 
+                                
+                                        <tr>  
+                                           <td>아이티윌</td>
+                                            <td>010-0000-0000</td>
+                                             <td>02-0000-0000</td>
+                                       </tr> 
+                          </tbody> 
+            </table>
+            
+            
+            
+            
+            
+                        <table>  
+                              <tbody>
+                                     <tr>
+                                   <th>이름</th>
+                                   <td>홍길동</td>
+                                          </tr>
+                              
+                                     <tr>
+                                           <th rowspan ="2">전화번호</th>
+                                            <!--  행이 3개가 있어야 함. 헤드가 있을 수 없음 
+                                            ㅣ 이렇게 나눠주는 애들이 없음. 바로 바디로 들어감.   -->
+                                            <td>010-1234-5678</td>
+                                    </tr> 
+                                
+                                        <tr> 
+                                            <td>02-1234-5678</td> 
+                                            <!-- 합쳐주지 않았기 때문에 순서대로 들어감. 왼쪽부터!! 오른쪽에 넣어주어야 함. 
+                                             비어있는 행을 만들지 않고, 두개의 행을 합쳐버리면 됨. td가 들어갈 수 있는 자리는 오른쪽.. -->
+                                       </tr> 
+                          </tbody> 
+            </table>
+
+               
+            
+            
+            
+    </body>
+</html>

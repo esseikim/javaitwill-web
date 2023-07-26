@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+
+h1 svg {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+h1 span {
+  display: inline-block;
+}
+
+a {
+  color: black; /* 링크의 색상을 검정색으로 설정 */
+  text-decoration: none; /* 밑줄 없애기 */
+}

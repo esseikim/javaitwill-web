@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.itwill</groupId>
+    <artifactId>spring1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <description>Spring Web MVC Example</description>
+    <!--프로젝트에서 사용하는 라이브러리(의존성) 이름/ 버전 설정-->
+    <dependencies>
+        <!--Java EE(Servlet/JSP, EL, action tag)가 제대로 컴파일되고 실행되기 위함. -->
+        <dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>6.0.0</version>
+    <scope>provided</scope><!--중복된 라이브러리가 서버에서 제공될 것. -->
+    <!--이 라이브러리를 war파일에 저장시켜 서버에 배포시킬 것이 아닌, 톰캣 서버에서 제공될 것. -->
+</dependency>
+        
+        <!--JSTL: jsp에서jakarta jstl을 사용하기 위한 라이브러리 2가지-->
+        <dependency>
+    <groupId>jakarta.servlet.jsp.jstl</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    <version>3.0.0</version>
+</dependency>
+<dependency>
+    <groupId>org.glassfish.web</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    <version>3.0.1</version>
+</dependency>
+        <!--JUnit Test에 필요한 2가지 라이브러리-->
+        <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.9.3</version>
+    <scope>test</scope> <!--: 프로젝트 빌드, 단위테스트를 위한 라이브러리. 서버에 로드 되지 않는다. -->
+</dependency>
+
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.9.3</version>
+     <scope>test</scope>
+</dependency>
+
+<!--log4j, Slf4j logging을 위한 4가지 라이브러리-->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.20.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.20.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-slf4j-impl</artifactId>
+    <version>2.20.0</version>
+</dependency>
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.7.36</version>
+</dependency>
+<!--Lombok-->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.26</version>
+    <scope>compile</scope> <!--프로젝트 컴파일 시에만 필요함. 컴파일 시 코드들을 자동 삽입. 웹서비스에서는 필요하지 않음.-->
+</dependency>
+<!--Spring Web MVC를 사용하기 위한 라이브러리-->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>6.0.9</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>6.0.9</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>6.0.9</version>
+</dependency>
+<!--Spring과 Junit의 연결 -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>6.0.9</version>
+</dependency>
+    </dependencies>
+    <!--프로젝트 빌드(프로젝트를 어떤 tool을 이용해 만들어 낼 것인가) 플러그인 설정-->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>17</release> <!--자바 17버전 사용-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

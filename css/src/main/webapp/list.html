@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+      <head>
+			<meta charset="UTF-8">
+	     	<title>CSS</title>
+                    <style type="text/css">
+                            ul{
+                                  list-style: none; /*리스트에서 마커가 사라짐. */
+                                  padding: 8px; /*안쪽 여백*/
+                                  background-color: MediumSeaGreen;
+                            }
+                            
+                            ul > li {
+                                  display: inline-block; 
+                                  /* display: 화면 표시방식: inline(줄바꿈 없음.) + block(가로/세로 크기 설정 ) -> 옆으로 배치. 
+                                  inline: element 배치, 줄바꿈 없어서 옆으로 배치. element가 가진 content 크기에 따라서 크기가 정해짐.
+                                  block : 자동줄바꿈 -> element 아래쪽 배치, 가로 세로 크기 원하는 대로 변경가능*/
+                                  width: 64px; /*각자가 차지하는 크기가 똑같은 크기가 됨. */
+                                  text-align: center; /* li들을 가운데 정렬  */
+                                  
+                                  
+                            }
+                            
+                            /* 점점 더 구체적으로 들어감, a의 sytle만 바꿔주는 것 */
+                            ul > li > a {
+                                    text-decoration: none;
+                                    /* 링크의 밑줄을 제거 
+                                    밑줄. 클릭하면 들어가게 되는 밑줄을 전부 없애버림 
+                                    ul과 li인 건 달라지지 않았는데 메뉴처럼 보임. css의 힘. 글자크기 바꾸고 하니깐 메뉴처럼 보임! */
+                                    color: white;
+                                    font-weight: bold;
+                            }
+                     </style>
+		</head>
+	<body>
+			<h1>List Style</h1>
+            
+            <!--  unordered list  -->
+            <ul>
+                    <li>
+                            <a href = "http://www.google.com"> 구글 </a> <!--클릭 시 이동하는 사이트, 속성 href , 마커태그: 링크 
+                            접속했던 히스토리가 남아있지 않은 사이트 : 파
+                            접속했던 히스토리가 남아있는 사이트: 보
+                            앵커태그의 기본 스타일: 빨강. 
+                            클래스나 아이디가 없기에 헤드태그로 스타일로 설정함. -->
+                    </li>
+                    <li>
+                            <a href = "http://www.naver.com">네이버</a>
+                    </li>
+                    <li>
+                            <a href = "http://www.daum.net">다음</a>
+                    </li>
+                    <li>
+                            <a href = "http://www.instagram.com">인스타</a>
+                    </li>
+            </ul>
+            
+	</body>
+</html>

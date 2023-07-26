@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+      <head>
+			<meta charset="UTF-8"  />
+	     	<title>CSS</title>
+            <!--  1. 외부(external) CSS 파일을 찾아갈때 앵커와 마찬가지로 속성을 href! 이런 파일이 있다~링크해주는 것. -->
+            <link rel = "stylesheet" href="css/mystyle.css" />
+            
+            <!--  2. 내부(internal) CSS -->
+                     <style>
+                    /* css 주석 오로지 이 한가지. */
+                    body{
+                        background-color: lightgray;  /*값들만 원하는 대로 적용해주면 됨. body: css에서 선택자라 부름*/
+                    }
+                    p{  
+                        border: 4px dashed crimson;
+                        padding: 16px;
+                    }
+                    </style>
+            
+		</head>
+	<body>
+			<h1>CSS(Cascading style sheet)</h1>
+            <!--  Front-End 개발언어:
+            1.  HTML: 웹 페이지의 정적인 컨텐트 작성. link, image, table, list, ... 태그이름들은 대소문자 구별 안함. 전부다 소문자로 쓰는 것을 권장함. 
+            2.  CSS: 웹 페이지의 스타일 설정.  color, width, height, position, ...연속된게 겹쳐짐. 항상 나중에 적용된게 최종적용됨. 코드의 순서 중요 
+            html color picker 
+            Color name : 이런 이름들 쓸 수 있다. 코드값: 6개의 알파벳과 숫자로 이루어짐. 16진수
+            rgb: 빛. 투명, 빛이 하나도 없으면 암흑 -> 블랙   # 두자리 R G B #000000 rgb에 색이 하나도 안들어감 -> 검정 
+            #ffffff: 투명      f: 채워짐.   숫자: 정도.. 
+            values: 코드값. 
+            picker: 찍으면 값을 보여줌
+             
+            우리가 볼수 있는 모든색을 섞어서 만들 수 있음.  
+            3.  JavaScript : 웹 페이지의 동적인 변화, 이벤트 처리, 서버와 (비동기) 통신.
+            
+             CSS 적용 방법:
+             1. external css: 다른 파일에 있는 CSS 내용을 링크해서 사용. 별도의 css 파일이 있음.
+              그 파일을 링크해주는 html 파일들은 똑같은 스타일을 적용할 수 있다. 
+              2. internal(embedding) css: HTML 파일의 head 안에서, <style> 태그 안에서 스타일 설정. 해당 html 파일에서만 동작. 
+              3. inline css: 각 태그의 style 속성의 프로퍼티로 스타일을 설정.
+            -->
+
+              <div>여기는 div1입니다..</div>            
+              <div>여기는 div2입니다..</div>            
+              <div>여기는 div3입니다..</div>       
+              <div>
+                    <p>여기는 paragraph1 입니다...</p>
+                    
+                    <!-- 3. inline CSS //외부 css나 내부 css를 사용한게 있는데, 특정 element만 따로 적용하고 싶을 때. 공통적용이 아닌
+                    모든 속성 다 무시하고 얘가 가진 속성으로 바꿔줄 때! -->
+                    <p style = "border: 2px dotted dodgerblue">여기는 paragraph2 입니다...</p> 
+             </div>     
+             
+	</body>
+</html>

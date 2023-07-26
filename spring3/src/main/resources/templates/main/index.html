@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http:://www.thymeleaf.org"
+           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+           layout:decorate="~{layout/base_layout}"> 
+           <!-- layout:decorate의 경로를 통해 어디로 가는지 설정함. 어떤파일? -->
+
+                <!-- 
+                 layout:fragment="main"이 이름을 가지고 있는 부분에 다음 main이 들어감. 
+                 layout:decorate 의 경로를 통해 어디로 가는지 설정함.
+                  -->
+            <main layout:fragment="main"> 
+                     <h1 th:text='|현재시간${now}'|>현재 시간</h1>
+                      <!-- <h1 th:text="|현재시간: ${now}|">현재 시간</h1> --> 
+       <!--  
+        * 'th:text=' 설정시(타임리프 문법 사용시), 기존에 text값이 사라지고 지정된 값이 새로 들어감(대체함).
+        * th:text 경고가 뜨는 이유: 표준 html이 가지고 있는 것이 아닌 타임리프라는 템플릿 엔진이 사용하는 문법
+             ==> 해결을 위해서 xmlns 사용하기.
+        -->        
+                      
+            </main>
+</html>

@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.itwill</groupId>
+    <artifactId>post</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging> <!--war파일-->
+    <description>JSP MVC example</description>
+    <dependencies>
+        <!-- Tomcat 10.1 WAS에서 JSTL을 사용하기 위해서 dependency 2개가 있어야 함. 복붙.jstl, org
+        여기에 오라클 라이브러리, 커넥션 툴 다양하게 추가할 것임. 
+        프로젝트이름, maven  이름이 [/post]인 컨텍스트를 다시 로드하는 것을 완료했습니다.-->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <!--Oracle JDBC library. 의존성들 안에 의존성이 있어야함.
+        https://central.sonatype.com/ maven이 사용하는 라이브러리를 저장하고 있는 repository 저장소
+>> ojdbc11 자바로데이터베이스를 연결함. 
+>> Snippets -->
+        <!-- JUnit Test. 
+        junit-jupiter-engine
+        단위 test를 위한 라이브러리 추가(2). 메서드를 사용가능하게 됨. main을 만들지 않기에 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.3</version>
+            <!--추가: 웹서비스를 위한 라이브러리가 아닌 개발단계의 테스트 용도로만 사용 -> 웹서버 반영x (scope 지정해주면 됨)-->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Oracle JDBC library 오라클 연결을 위함-->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>23.2.0.0</version>
+        </dependency>
+        <!--HikariCP -Connection Pool.  로그 출력 기능이 있어서 slf4j도 추가됨-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <!--Log4j - 로그 출력 라이브러리:  sysout보다 편리-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+        <!--log4j-api -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+        <!--log4j-slf4j-impl-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+        <dependency>
+            <!-- slf4j: 2.0.0-alpha1(테스트버전. alpha, beta, gm) 알파버전이 아닌 정식버전 사용을 위해 추가-->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+            </plugin>
+        </plugins>
+    </build> <!--원래 있던 build, 끝날 땐 project로 끝남-->
+</project>

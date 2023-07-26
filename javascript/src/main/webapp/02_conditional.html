@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript 2</title>
+</head>
+
+<body>
+    <h1>자바스크립트 조건문</h1>
+
+    <input type="number" id="numberInput" placeholder="정수 입력" />
+    <!--모든 input에는 value가 존재  -->
+    <button onclick="checkEven()">짝수? 홀수?</button>
+    <!-- element에 이벤트리스너 등록. 함수호출()-> 실제코드 실행 -->
+    <button onclick="checkPositive()">양수? 음수?</button>
+    <button onclick="checkEven2()">삼항 연산자</button>
+    <div id="result">결과</div>
+    <!-- element를 찾기 위한 id  -->
+    <!-- input과 div를 id로 찾아야 함. 버튼은 굳이 찾을 필요x. 함수만 만들어놓으면 됨.  -->
+
+    <script>
+        /*  JavaScript 변수 선언 방법:
+        	- 자바스크립트는 변수를 선언할 때 변수 타입을 명시하지 않음. 
+        	- 변수의 타입은 문장이 실행될 때(변수의 갑싱 할당될 때) 결정됨.
+           - 변수에 저장된 값을 변경할 때 다른 타입의 값을 할당하는 것이 가능. 
+           - 자바스크립트는 동적 타이핑(dynamic typing) 언어. <- dynamic하게 type이 바뀜
+           - (비교) 자바는 정적 타이핑(static typing) 언어.
+        
+           (1) var 변수이름 = 값; (과거). 타입이 아닌 키워드
+                 - 값을 변경할 수 있는 변수. 스크립트 전체에서 사용 가능한 변수. 블록에 구애받지 않음. 사용 x(오남용의 가능성)
+           (2) let 변수이름 = 값; 
+                 - 값을 변경할 수 있는 변수. 선언된 블록({}) 안에서만 사용 가능한 변수. 
+           (3) const 변수이름 = 값;
+                 - 값을 변경할 수 없는 변수(상수). 선언된 블록 안에서만 사용 가능한 변수.'                 
+           (주의) var는 같은 이름으로 변수를 여러번 선언할 수 있음. 중복변수 선언 가능. 엉망..
+           let, const는 같은 이름으로 변수를 선언할 수 없음.
+        */
+        
+        const x = 1;
+        console.log('x =', x, typeof x); /*브라우저에서 html 코드 불러오면 이 js코드도 실행됨. 
+        데이터타입: number. 타입은 존재하나 변수에 값 할당을 할 때 선언 x. 
+        실행된 다음에 x라는 변수의 타입이 결정됨. */
+        
+        /* x = 2; <- 실행 중 오류 발생: 상수(const) 변수는 값을 재할당할 수 없음. 
+        typeError: Assignment to constant variable. 에러 발생: 코드 실행 후에. 
+        compiler 대신 interpreter. line by line. -> 번역하는 과정에서 에러 발생. 실행 전 에러 인식 불가.  
+        에러 발생 후 다음 코드 실행 불가. */
+        
+        // let x = 2; <- 같은 이름 선언 불가
+        
+        let y = 10; 
+        console.log('y=' , y, typeof y);
+        
+        y = 'hello'; // let으로 선언된 변수.  값 재할당 가능, 타입 변환 가능.(다른 타입의 값도 재할당 가능)<- 타입검사x 
+        console.log('y=' , y, typeof y);
+        
+        // 자바스크립트의 비교 연산자: 
+        //	==(값만 비교) /  ===(타입, 값 비교) 
+       //  != / !== (타입까지)  비교시 ===사용. 
+       // 나머지 동일 (>, >=, <, <=) 	  
+      /* 피연산자들의 타입을 자동으로 변환한 후 값이 같은지/다른지를 비교,
+       피연산자들의 타입으로 변환하지 않고, 타입과 값이 같은지/ 다른지를 비교
+       
+        논리연산자: &&, ||, ! and or not 자바와 동일
+        오라클 : and or not 단어를 사용. 
+        언어들마다 키워드, 기호를 사용하는냐 다름 기억. 
+       */
+       
+       // id="numberInput"인 html element를 찾음
+       const numberInput = document.getElementById('numberInput');
+       console.log(numberInput); /*찾았나 못찾았나 여부만 봄.  */
+        
+       // id="result"인 div element를 찾음
+       const result = document.getElementById('result');
+       console.log(result);
+       
+       function checkEven(){
+    	   const number = numberInput.value; // input에 입력된 값을 읽음. 
+    	   console.log(number, typeof number);  // 입력창(input)에서 값을 읽으면 무조건 타입은 string. "123"이라는 문자열
+          //    if (number % 2 === 1){
+        	  if (number % 2) { // 자바: if문의 조건식: 숫자, 문자열 불가. 계산 결과는 boolean. 숫자인데도 동일하게 동작 
+            	  result.innerHTML = number + ' : 홀수';  /* js도 대소문자 구별 */
+              }else{
+            	  result.innerHTML = number + ' : 짝수';  /* innerHTML 결과 -> 새로운 문자열로 변경  */
+              /* 2로 나눈 나머지가 있으면 실행, 없으면 아래 실행. */
+              }
+          }
+           
+    	     function checkPositive() {
+    	    	   const number = numberInput.value; // input에 입력된 값을 읽음. 
+    	           console.log(number, typeof number);  // 입력창(input)에서 값
+    	     
+    	             if (number > 0 ) {   
+    	            	 result.innerHTML = number + ' : 양수';
+    	             } else if (number < 0 ) {
+    	            	 result.innerHTML = number + ' : 음수';
+    	            	 } else {
+    	            	 result.innerHTML = number + ' : 0';
+    	            	 }
+    	             }
+    	     
+    	     // 삼항 연산자: (조건식) ? (참일 때 값) : (거짓일 때 값)
+    	    // (조건식) ? (참일 때 값) : (거짓일 때 값)
+    	   // (조건식1)? (참일 때 값) : ((조건식 2)? (참일 때 값) : (거짓일 때 값))
+    	     function checkEven2(){
+    	    	     const number = numberInput.value;
+    	    	     result.innerHTML = (number % 2) ? '홀수' : '짝수';
+    	    	    		 /* 숫자를 2로 나눈 나머지가 있나요?  */ 
+    	     }
+    	        // 자바스크립트는 사칙연산을 수행할 때 타입을 자동으로 변환. 
+             // string 타입의 number 변수를 number 타입으로 변환한 후 2로 나눈 나머지를 계산. 
+             // 자바: text.getTextfiled.. 
+             // 코드 변경: element에서 보면 됨. 
+             /*
+              java: if(조건식)에서 조건식의 결과는 반드시 boolean(true/false)이어야만 함. 
+              js: false value(false로 취급하는 값)이 있음. 
+              (1) 숫자인 경우, 0 - if 문 안에서 계산결과가 0이면 false다
+              (2) 문자열(string)인 경우, 빈 문자열(' ') - 공백이 하나라도 있으면 안됨.('') 
+              (3) 배열인 경우, 빈 배열([])
+              (4) 객체인 경우, null <- null만 아니면 true
+              (5) undefined(값이 할당되지 않은 변수) ->변수 선언, 값 할당 x -> if문 안에서 false 취급
+              - 전부다 없다라는 개념.
+              
+              */
+        </script>
+</body>
+</html>

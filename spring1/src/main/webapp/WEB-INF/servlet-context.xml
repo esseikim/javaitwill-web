@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--서블릿의 환경설정 정보 파일(xml), spring에서는 서블릿을 사용함-->
+<!-- mlns(main space)가 설정되어 있어야 해당 태그( mvc, context,...)들을 사용할 수가 잇다. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+        
+        <!--Spring MVC 설정들을 애너테이션(annotation) 기반으로 처리
+        서블릿이 에너테이션 기반으로 동작하게 됨. 따로 클래스의 객체를 생성 안해도 변수 이름으로 사용 가능-->
+        <mvc:annotation-driven /> 
+        
+            <!-- Spring MVC에서 dispatcherservlet이 처리하지 않는 정적 요청에 필요한 파일들(이미지(image 폴더), css, javascript, .....)의 폴더 위치:
+        동적 요청: 요청이 왔을 때 HTML을 그린 후 응답 
+            -> 단, 이미지 태그가 존재할 경우 src(이미지의) 요청을 또 보냄 그럼 해당 이미지를 찾아서 폴더 위치를 알려줌
+        정적 요청:  이미지 태그가 존재할 경우 src(이미지의) 요청을 또 보냄 그럼 해당 이미지를 찾아서 폴더 위치를 알려줌 -> 서버를 거치지 않고 그래서 WEB-INF(검색 불가)가 아닌 webapp에 설정.
+     -->    
+       <!-- /**: static 폴더 밑에 하위폴더를 찾아가겠다. 의미 -->
+        <mvc:resources location="/static" mapping="/**"></mvc:resources>   
+        
+       <!-- View Resolver: Spring MVC에서 사용하는 뷰(JSP, ...)를 찾기 위한 설정: 어떤 폴더 밑에 jsp파일이 있느냐 -->   
+       <!-- dispacherservlet이 생성될 떄 해당 클래스의 객체가 생성됨. -->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                <property name="prefix"  value="/WEB-INF/views/" /> <!-- views 폴더를 만들어 .jsp 를 저장. 파일 이름만 적어주면 됨.  -->
+                <property name="suffix" value=".jsp" />
+        </bean>
+        <!-- bean: 자바 객체, property: 그 객체가 가지고 있는 멤버 변수 -->
+      
+  <!-- 특정 패키지(com.itwill.spring1.web) 아래에 선언된 컴포넌트 애너테이션(@Controller, @RestController)이 
+          선언된 클래스들을 bean으로 관리:
+          컨트롤러 클래스들을 작성하는 패키지 이름.
+          그래서, 다른 패키지에서 @Controller을 작성하면 못 알아들음.
+     -->
+        <!-- 컨트롤러 클래스들을 작성하는 패키지 이름. -->
+        <context:component-scan base-package="com.itwill.spring1.web" />
+</beans>

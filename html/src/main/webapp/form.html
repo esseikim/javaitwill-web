@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8" />
+      <title>HTML</title>
+   </head>
+   <body>
+        <h1>HTML Form</h1>
+        
+        <!--  브라우저(클라이언트)에서 사용자의 입력을 받아서, 입력 내용을 서버로 전송하는 방법:
+        1. <form>태그 안에서 필요한 입력 요소 (input element)들을 작성.
+        2. <form> 태그의 submit 버튼을 클릭하면 입력 요소들에 입력한 내용들이 서버로 전송
+        
+        전송 방식(method 속성):
+        1. get 방식: form의 기본 전송 방식. method 속성을 설정하지 않으면 기본은 GET 방식
+          - 클라이언트가 보내는 데이터가 요청 주소의 질의 문자열(query string)에 포함되는 방식.
+           사용자 입력 내용이 쿼리스트링에 포함됨! 
+          - 요청 주소(result URlL)의 형식:
+            프로토콜: //서버주소[:포트번호]/경로?질의문자열 
+            (예) http://localhost:8081/html/result.html?q=value
+          -  요청 주소에서 경로와 질의 문자열은 ?로 구분.
+          - 질의 문자열의 형식: param1=value1&param2=value2  
+          - 질의 문자열에서 요청 파라미터들은 &로 구분. 
+         
+         2. POST 방식: 클라이언트가 보내는 데이터가 요청주소에 노출되지 않고, 
+         요청 패킷의 몸체(body)에 포함돼서 전송되는 방식. 
+         - form의 기본 전송 방식이 아니기 때문에, method 속성 값을 "post"라고 설정 
+         - GET 방식은 요청 파라미터들을(데이터를) URL에 포함시켜서 보내는 방식이기 때문에, 전송되는 데이터의 크기가 제한이 있음. 로그인 같은 경우 사용 불가. 
+         - POST 방식은 전송 데이터의 크기 제한이 없음. 로그인은 반드시 post 방식을 써야
+         
+         css: 꾸며주는 것. 
+         -->
+         
+         
+        <h2>GET 방식 전송</h2>
+            <form method="get" action="result.html">  <!-- SUBMIT 했을 때 보낼 주소. -->
+                <input type="text" name="q" />  <!-- 검색어의 이름을 q라고 query라고 사용하고 있다. get 방식. -->>
+                <!--<input type="password" name="password" />-->
+                <input type="submit" value= "검색"/> <!--  -->
+            </form>
+            
+        
+        <hr/>
+        
+        <h2>POST 방식 전송</h2>
+        <form method ="post"  action ="result.html">  
+                <input type = "text"  name = "id" placeholder="아이디"/>
+                <input type = "password"  name = "pwd" placeholder="비밀번호"/> <!--  입력된 값이 아닌 힌트.  -->
+                <input type = "submit"  value="로그인"/> 
+        </form>          
+        
+        <hr/>
+        
+        <h2>여러가지 입력 타입들</h2>
+        
+               <form action="result.html"><!-- method 속성 값을 지정하지 않으면 기본값은 GET.  input: inline element 옆에 공간만 있으면 옆으로 쭉 배치됨. 
+            input 하나마다 div로 감싸거나, <br/> 강제 줄바꿈 
+            인풋타입 패스워드, 이메일, 넘버, submit 버튼. 레이블 클릭 시 id에 있는 값 for에 있는 값이 같아야함! rb1을 위한 레이블. 수신동의를 클릭하게 되면 id의 rb1을 찾아가서 
+            체크해줌. -->
+                       <input type="text" name="userid" placeholder="아이디" />
+                       <br />
+                       <input type="password" name="pwd" placeholder="비밀번호"/>
+                       <br />
+                       <input type="email" name="email" placeholder="email@abc.com" />
+                       <!--  서버가 타입에 맞게끔 입력이 되었는지도 확인함. @: %40 유니코드 값 input에 따라서 보여주는 키패드가 다름 localhost8081/html/form.html 
+                       똑같은 페이지가 보임. 이메일, 아이디를 터치했을 때 키패드의 타입이 다를 것.  -->
+                       <br />
+                       <input type= "number" name = "age" placeholder="나이"/>
+                         <br />
+                       <input type = "date"  name ="birthday"/> <!--  클릭하면 연월일 문자열 형식이 들어가게 됨. 달력을 보여주는 것: 브라우저마다 다를 수 있음. 
+                       똑같은 웹사이트 접속해도, 브라우저마다 보여주는 모양(아이콘 모양) 이런것들이 다를 수 있음. 웹퍼블리셔는 모든 브라우저에서 똑같이 보이느냐 테스트해야함.  -->
+                       <br/>
+                       <input type = "datetime-local" name = "created-time"/><!--  문자열이 들어가는 형식이 연월일 오전오후 몇시몇분까지 입력가능 -->
+                       <!-- 라디오 버튼 -->
+                       <input type = "radio" name= "receive" value = "T"  id = "rb1">
+                       <label for = "rb1">수신 동의</label>
+                       <input type = "radio"" name= "receive" value = "F" checked id = "rb2"/> <!--  라디오 버튼은 이름이 같으면 같은 이름들 중에서 하나만 선택되도록 되어짐.
+                       이름을 붙여주는게 label. value 속성: 제출 시 클라이언트가 서버로 어떤 버튼이 클릭되었는지 보내는 값. input에 입력한 값!  receive = F 
+                       네임 같은값, 밸류 다른값.  input에 id를 줘야함. 찾아갈 수 있어야 하니. 
+                       이 레이블은 rb1을 위한 레이블. for: id를 찾아가는 것.-->
+                        <label for = "rb2">>수신 거부</label>
+                       <br/>
+                       <!-- 체크박스 보여지는 건 서울경기인천, 전송되는 값은 밸류 1 2 3-->
+                       <input type = "checkbox" name="city"  value = "1"  id= "cb1"/>
+                        <label for = "cb1">서울</label>
+                        <input type = "checkbox" name="city"  value = "2"  id= "cb2"/>
+                        <label for = "cb2">경기</label>
+                        <input type = "checkbox" name="city"  value = "3"  id= "cb3"/>
+                        <label for = "cb3">인천</label>
+                        <br/>
+                        <!-- 콤보박스(combo box), 목록상자(drop-down list), 스피너(spinner) 
+                        input이 아닌 select 키워드로 만듦!. select에 이름 속성을 준다. 속성은 이중 하나만 사용가능! -->
+                        <select name = "domain">
+                                <option value = "naver.com">네이버</option>
+                                <option value = "kakao.com">카카오</option>
+                                <option value = "google.com">구글</option>
+                                <option value = "coupang.com">쿠팡</option>
+                        </select>
+                        <br/> <!--  input과 마찬가지로 inline 요소 -> 줄바꿈  
+                        domain=카카오 브라우저에서 서버쪽으로 카카오라는 값이 전달됨. 값에 대한 파라미터 이름을 주려는게 도메인. 각각의 옵션에 네임 안주고 
+                        셀렉트에서만 네임을 주고, 옵션에는 따로 주지 않으면. 전송시 domain=카카오이게 전송이 됨.  
+                        화면에 보여지는 값과, 전달값 다르게 하기!
+                        밸류를 줌. 서버를 보내줄 수 있는 밸류 네이버, 카카오, 구글, 쿠팡에 밸류를 주면 되는 것.  제츨을 하게되면 쿠팡이 아닌 밸류에 입력한 값이 전송됨..
+                       파라미터 이름이 없으면 전송되지 않음! domain 중요~ 
+                         <select> 하면 안됨. 
+                         네임 속성에 있는 것들만 서버로 전송됨.  name="..."
+                         input은 한줄짜리만 입력. 여러줄짜리. 
+                       -->
+                       <!--  여러줄 입력상자, 인라인 요소, 40글자 5줄 -> 스크롤, 워드래핑의 개념-->
+                       <textarea rows="5" cols=""40 name = "memo"></textarea>
+                       <br/>
+                        <input type = "reset" /><!-- 기존 입력 값들을 모두 지움 -->
+                                               
+                        <input type="submit" /><!-- 입력 값들을 서버로 전송.
+                         키패드에 숫자 아닌 것들은 입력 불가. 브라우저에서 처리해줌! .numbertypeException발생 안함! 
+                        노란표시가 한줄이면 오타다. -->
+                        
+        </form>
+        
+
+   </body>
+</html>

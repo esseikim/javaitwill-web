@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+      <head>
+			<meta charset="UTF-8">
+	     	<title>CSS</title>
+            <style>
+                    table#tbl-member, table#tbl-member th, table#tbl-member td{ /*테이블 밑의 모든 th와 td를 찾음  */
+                            border: 1px solid gray;
+                            border-collapse: collapse; /* 선이 겹치는 부분들을 겹쳐버리겠다. */
+                    }
+                    
+                    table#tbl-post{ /* 테이블은 블럭요소 -> 크기 바꿀 수 있음  */
+                    /* 브라우저에서 사용 가능한 가로 길이의 100%를 사용.    브라우저가 작아지면 작아지는 대로 커지면 커지는 대로 그 길이를 
+                            전부 다 사용하는 것.  */
+                           width: 100%; 
+                          border-collapse: collapse;
+                    }
+                    
+                    table#tbl-post, table#tbl-post th,  table#tbl-post td{  /*테이블, th, td에 패딩이 다 들어감.  */
+                            border-bottom: 1px solid gray;
+                            padding: 4px;
+                    }
+                    
+                     table#tbl-post th{
+                            background-color: MediumSeaGreen;
+                            color: white;
+                            text-align: left;
+                     }
+                     
+                     table#tbl-post > tbody > tr:nth-child(even){    /* 괄호 안에 숫자에 따라 색이 바뀜 odd. 
+                     공백<- 자손엘리먼트를 찾아가게 됨.  tr의 자식(td중 홀수 1234 중 짝수만 적용) */
+                             background-color: #efefef;
+                     }
+                     
+                      table#tbl-post > tbody > tr:hover{
+                            background-color: darkgray;
+                      }
+                      /* 
+                           CSS display 속성(property):
+                            1. block:  <div>, <p>, <h1>, <ul>, <li>, <table>, <header>, <main>, <footer>, <nav>, <aside>, ... 기본적으로 블럭 속성을 가짐. 
+                                - 항상 새 줄에 (이전 요소(element)의 아래쪽에) 배치
+                                - width(가로), height(세로)를 변경할 수 있음!
+                                - margin, padding을 변경할 수 있음. 
+                            2. inline: <span>, <strong>, <em>, <a>,... 굵게 강조, 이탤리체, 링크
+                                - 같은 줄(이전 요소의 오른쪽)에 배치.
+                                - width, height를 변경할 수 없음!
+                                그 요소가 가지고 있는 content로 딱 weight, height를 가짐. 
+                                - margin, padding을 변경할 수 있음. 
+                            3. inline-block: <img><- 이미지 태그는 원래 인라인 블럭! 
+                            - 이미지가 들어갈 공간만 충분하면 인라인처럼 옆으로 배치, 가로 세로 크기도 변경할 수 있음. 
+                            인라인 속성과, 블럭 속성을 가짐
+                            -  inline 속성: 같은 줄(이전 요소의 오른쪽)에 배치 
+                            -  block 속성: width, height를 변경할 수 있음. 
+                            블럭요소를 인라인으로 바꿈. 리스트 li(블럭)-> 인라인 블럭으로 만들어 옆으로 배치, 옆으로 배치되면서도 크기 일정하게 만들기 위해서
+                            블럭속성도 갖게함. 
+                            앵커 탭:  버튼 모양처럼 만들겠다.  
+                            블럭 + 인라인, 인라인+ 블럭  
+                            4, none: 화면에 표시(display)하지 않음. 요소가 차지하는 크기가 없음. 
+                            화면에 사라지게 하는 효과.. 
+                            
+                       */
+                     
+            </style>
+		</head>
+	<body>
+			<h1>Table Style</h1>
+                    <table id= "tbl-member">
+                           <caption>회원 정보</caption>
+                           <thead> 
+                                    <tr>
+                                            <th>아이디</th>  <!-- 가운데 정렬  -->
+                                            <th>비밀번호</th>
+                                            <th>이메일</th>
+                                    </tr>
+                           </thead>
+                    
+                           <tbody>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>admin0000</td>
+                                    <td>admin@itwill.co.kr</td>
+                                </tr>
+                                <tr>
+                                    <td>guest</td>
+                                    <td>guest</td>
+                                    <td>quest@guest.com</td>
+                                </tr>
+                                <tr>
+                                    <td>test</td>
+                                    <td>test</td>
+                                    <td>test@test.com</td>
+                                </tr>
+                           
+                           </tbody>
+                    
+                    </table>
+                    
+                    <hr/>
+                    
+                    <table id= "tbl-post">
+                            <caption>자유게시판</caption>
+                            <thead>
+                                   <tr>
+                                           <th>번호</th>
+                                           <th>제목</th>
+                                           <th>작성자</th>
+                                           <th>작성날짜</th>
+                                   </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                            <td>1</td>
+                                            <td>CSS</td>
+                                            <td>admin</td>
+                                            <td>2023-04-01</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                            <td>2</td>
+                                            <td>공지사항입니다.</td>
+                                            <td>관리자</td>
+                                            <td>2023-04-02</td>
+                                    </tr>
+                                    
+                                     <tr>
+                                            <td>3</td>
+                                            <td>안녕하세요</td>
+                                            <td>guest</td>
+                                            <td>2023-04-03</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                            <td>4</td>
+                                            <td>곧 점심시간입니다.</td>
+                                            <td>오쌤</td>
+                                            <td>2023-04-27</td>
+                                    </tr>
+                                    
+                                      <tr>
+                                            <td>5</td>
+                                            <td>test</td>
+                                            <td>test</td>
+                                            <td>2023-04-27</td>
+                                    </tr>
+                            </tbody>
+                            
+                    </table>
+	</body>
+</html>

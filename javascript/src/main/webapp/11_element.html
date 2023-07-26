@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>JavaScript 11</title>
+        <style>
+            div { /*tag selector*/
+                border: 1px solid gray;
+                margin: 8px;
+                padding: 8px;
+            }
+        </style>
+	</head>
+	<body>
+         <script src="js/element.js"></script>
+		<h1>HTML 요소 찾기, 이벤트 핸들링</h1>
+        <div id="d1" class="c1">Division 1(id=d1, class=c1)</div>
+        <div id="d2" class="c1">Division 2(id=d2, class=c1)</div>
+        <div id="d3" class="c2">Division 3(id=d3, class=c2)</div>
+        <div id="d4" class="c2">Division 4(id=d4, class=c2)</div>
+        <!-- id가 같다고해서 에러가 발생하는 건 아니지만,
+         id의 목적은 id가 하나면 하나의 element를 찾기 위함이기 때문에 중복을 피하는 것이 좋음 -->
+         
+         <button id="btn1">id로 찾기</button>
+         <button id="btn2">class로 찾기</button>
+         <button id="btn3">tag로 찾기</button> <!-- tag = div -->
+         <button id="btn4">querySelector</button>
+         <button id="btn5">querySelectorAll</button>
+         <!-- selector와 마찬가지로 element를 찾을 때 id, class, tag가 기본임 -->
+         
+	</body>
+</html>

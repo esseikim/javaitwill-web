@@ -1,0 +1,12 @@
+@charset "UTF-8"; /*CSS 파일의 인코딩 설정*/
+
+body{
+    background-color: aqua;
+}
+
+div {
+     border: 2px solid white; /* 테두리 선의 두께, 종류,색깔  설정 끝날때마다 세미콜론 */
+     margin: 14px; /* HTML 요소 바깥 여백. 마진은 둘중 큰 픽셀이 적용됨. 마진은 늘어나지 않고. 마진이 겹쳐보인다고 생각하기.*/
+     padding: 16px; /* HTML 요소의 테두리 안쪽 여백*/
+     
+}

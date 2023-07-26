@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript 1</title>
+<style>
+div { /* 태그 이름으로 찾는 셀렉터  */
+    border: 2px solid gray;
+    margin: 8px;
+    padding: 8px;
+}
+</style>
+</head>
+<body>
+
+    <h1>자바스크립트 소개</h1>
+
+    <h2>HTML element의 컨텐트 변경</h2>
+    <div id="box1" onclick="changeContent()">
+        <!-- div 클릭시. change 함수호출   -->
+        > 여기는 box1입니다...
+        <!--  context toot: 프로젝트 이름 javascript -->
+    </div>
+
+    <h2>HTML element의 속성(attribute) 변경</h2>
+    <div id="box2" onclick="changeStyle()">
+        <!--2. style 속성   id, onclick,...-->
+        여기는 box2입니다...
+    </div>
+
+
+    <script>
+            function changeContent(){ /*div 안에 img가 있었다면 클릭 시 img 변경 가능. content: 시작, 엔드태그 사이  */
+                const box1 = document.getElementById('box1'); /*document 객체 사용*/ 
+                box1.innerHTML = '안녕하세요, <strong>JavaScript</strong>';  /*1. 컨텐트 변경. 굵게
+                
+               3. 컨텐트는 그대로 두고, 속성만 변경. 이미지:  속성 src만 변경하면 됨. !!!*/
+         
+            
+            /* 브라우저: HTML 문서를 파싱할 때 위-> 아래, script 위치 중요해짐. 
+            script body 맨 마지막에! body에 있는 것들이 만들어지기 전에, javascript가 먼저 실행될 수 있음.
+            id 같은 걸로 element 찾는 게 안 될수도! 
+            */
+            }
+            
+            let toggle = true;
+            
+            function changeStyle(){
+            	const box2 = document.getElementById('box2');
+            	
+            	if(toggle){
+            	box2.style.backgroundColor = 'crimson';
+            	box2.style.color = 'white';
+            	box2.style.fontSize = '200%';
+                toggle = false;
+            	}else{
+            		   box2.style.backgroundColor = 'white';
+                       box2.style.color = 'black';
+                       box2.style.fontSize = '100%';
+                       toggle = true;
+            	     }
+            }
+            </script>
+
+</body>
+</html>

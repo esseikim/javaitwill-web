@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
+    <Appenders> <!--로그를 콘솔창에 덧붙이겠다. 로그를 파일에 저장 가능. 파일에서 관리하기도 함. 그런 로그들이 남아있어야 에러 수정 -->
+        <Console name="out" target="SYSTEM_OUT"> <!-- 이름을 out으로, 자바의 sysout을 이용함 -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5p %C - %m%n" />
+             <!-- 패턴: 24시간 단위로 시분초, 1000/1초까지 로그가 출력되는 시간을 쓰겠다. 
+                            %t: 로그가 어떤 클래스에서 어떤 타입으로 나오느냐. %p: 로그 레벨(5자리 정보타입, 경고타입,...) %m:메시지 %n: 줄바꿈-->
+            <!--
+            11:35:33.926 [main쓰레드에서 실행] INFO  com.itwill.post.dbcp.DbcpTest(클래스이름) 
+            메시지: - ds = HikariDataSource (HikariPool-1)  -->
+        </Console>
+    </Appenders>
+    <Loggers>
+    <!-- log4j2 로그 레벨: all < trace < debug < info < warn < error < fatal  심각.. -->
+     <Logger name="com.zaxxer.hikari" level="INFO" additivity="false">  <!--더 많은 로그: trace  -->
+            <AppenderRef ref="out" />
+        </Logger>
+        <Root level="INFO" additivity="false">
+         <!-- 어떤 레벨 이상을 로그로 출력하겠다. 패턴과 함께 지정한 파일!!!! info 레벨 이상을 출력하겠다.
+                가장 하위 폴더의 로그만 사용. 같은 로그가 두번 나오지 않도록 -->
+            <AppenderRef ref="out" />  <!-- 이 이상의 로그들을 console 창에 출력하겠다. -->
+        </Root>
+    </Loggers>
+</Configuration>
+
