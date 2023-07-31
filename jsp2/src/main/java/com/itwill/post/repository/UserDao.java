@@ -12,11 +12,11 @@ import com.itwill.post.datasource.HikariDataSourceUtil;
 import com.itwill.post.model.User;
 import com.zaxxer.hikari.HikariDataSource;
 
-// Repository(Persistence) 계층. 싱글턴 패턴.
+// Repository(Persistence) 계층. 싱글톤 패턴.
 public class UserDao {
     private static final Logger log = LoggerFactory.getLogger(UserDao.class);
     
-    private HikariDataSource ds;// Connection Pool 객체 -> utill은 우리가 만든 것으로 주소와 아이디 비번만 잇는 클래스이다. 연결을 하려면 다음으로 정하기.
+    private HikariDataSource ds; // Connection Pool 객체 -> utill은 우리가 만든 것으로 주소와 아이디 비번만 있는 클래스이다. 연결을 하려면 다음으로 정하기.
     
     private static UserDao instance = null;
     

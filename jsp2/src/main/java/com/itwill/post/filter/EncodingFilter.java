@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
     <url-pattern>/*</url-pattern> <%-- 필터에서 조건이 맞을 경우 넘어갈 모든 controller 즉, 모든 servlet 해당. 만약 따로 호출할 controller가 있으면 해당 url을 입력하면 됨.--%>
   </filter-mapping>
  */
-// (2) @WevFilter 애너테이션으로 설정할 수 없음.
+// (2) @WebFilter 애너테이션으로 설정할 수 있음.
 public class EncodingFilter extends HttpFilter implements Filter {
 
     // SLf4j 로깅 기능:
@@ -68,16 +68,17 @@ public class EncodingFilter extends HttpFilter implements Filter {
         
         // 클라이언트에서 온 요청을 controller(서블릿)에게 전달하기 전에 실행할 코드들을 작성.
         // 요청(request)의 인코딩 타입을 "UTF-8"로 설정:
-        // + 상속 관계: Request > ServletRequest > HttpServletRequest
+        // 상속 관계: Request > ServletRequest > HttpServletRequest
         request.setCharacterEncoding("UTF-8");
-        // 요청이 서블릿으로  가기 전에 할 일.
+        // 요청이 서블릿으로 가기 전에 할 일.
+
         
-		// 요청을 필터체인의 그 다음 단계로 전달 -> (다른 필터가 없이 바로 controller를 호출하는 거라면) controller 메서드가 호출됨.(homeController.doGet() 호출)
+		// 요청을 필터체인의 그 다음 단계로 전달 -> (다른 필터가 없이 바로 controller를 호출하는 거라면) 컨트롤러 메서드가 호출됨.(homeController.doGet() 호출)
         // -> 필터가 여러개일 경우도 존재.
 		chain.doFilter(request, response); 
 		// Filterchain: (필터가 2개이상일 경우) 필터들이 여러개 연결 되어있는 모습
-		// FilterCain: 필터가 1개 일경우 controller에게 해당 파라미터를 전달.
-		//               //   2개 일경우 다른 Filter에게 해당 파라미터를 전달.
+		//				 필터가 1개 일경우 controller에게 해당 파라미터를 전달.
+		//                    2개 일경우 다른 Filter에게 해당 파라미터를 전달.
 		
 		// Filter -> servlet + forward 방식 jsp 호출 -> doFilter -> 응답.
 		

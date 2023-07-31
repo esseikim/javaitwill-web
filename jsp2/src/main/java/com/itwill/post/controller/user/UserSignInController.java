@@ -65,7 +65,7 @@ public class UserSignInController extends HttpServlet {
 		session.setAttribute("signedInUser", user.getUsername()); // 세션 객체에 로그인 username만 저장. 로그인 된 사용자 이름만 변수"signedInUser"에 저장
 		
 		// (2) 적절한 페이지로 이동. -> 메인 페이지로 이동.
-		response.sendRedirect("/post");
+		response.sendRedirect("/post");  // contextroot부터. main.jsp 
 		
 	}
 

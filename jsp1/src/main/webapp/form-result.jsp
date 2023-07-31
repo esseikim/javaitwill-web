@@ -10,7 +10,7 @@
 		<h1>요청 결과 처리</h1>
         
         <%-- 클라이언트에서 보낸 요청 파라미터의 값을 찾는 방법: 
-             getParamete: 서버에서는 Get 방식, Post 방식 구별하지 않음.
+             getParameter: 서버에서는 Get 방식, Post 방식 구별하지 않음.
         --%>
         <%
         String username = request.getParameter("username"); // 톰캣이 자바의 메서드 호출, 그 안에 변수가 선언이 되어 있음. -> jsp에게 줌: 책 9장 참고.
@@ -18,7 +18,7 @@
         <h2>안녕하세요, <%= username %>!</h2>
         
         <%-- JSP 내장 객체
-            JSP가 Java로 변환될  때 _jspService(request, response) 메서드 안에서 선언되는 변수들
+            JSP가 Java로 변환될 때 _jspService(request, response) 메서드 안에서 선언되는 변수들
             JSP에서 별도의 변수 선언 없이 JSP 태그 안에서 언제든지 사용할 수 있는 변수들.
             * String request = ""; => error 발생
               -> request: 이미 선언되어 있는 지역변수이기에

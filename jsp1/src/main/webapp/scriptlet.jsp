@@ -87,14 +87,14 @@
          <hr />
          <h2>Description List</h2>
          <%-- dl 만들기: dt는 연락처에서 이름, dd는 연락처에서 전화번호, 이메일 --%>
-         <dl>
-         <% for (Contact c : data) { %>
-            <dt> <%= c.getName() %>
-                <dd><%= c.getPhone() %></dd>            
-                <dd><%= c.getEmail() %></dd> 
-            </dt>
-         <% } %>  
-         </dl>
+          <dl>
+        <% for (Contact c : data) { %>
+            <dt><%= c.getName() %></dt>
+            <dd><%= c.getPhone() %></dd>
+            <dd><%= c.getEmail() %></dd>
+        <% } %>
+        </dl>
+         
          
 	</body>
 </html>

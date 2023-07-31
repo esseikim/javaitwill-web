@@ -7,7 +7,7 @@ public class HikariDataSourceUtil {
         // singleton 디자인 패턴: 데이터소스 하나만 생성할 수 있도록. 여러개 x
         private static HikariDataSourceUtil instance = null;
         
-        private HikariDataSource ds;  // 환경설정, 환경설정 객체, ds가 null이 아님을 확인함 -> ds 데이터 코드를 안심쓰고 쓸 수 있음. 멤버변수 선언. 
+        private HikariDataSource ds;  // 환경설정(->), 환경설정 객체, ds가 null이 아님을 확인함 -> ds 데이터 코드를 안심쓰고 쓸 수 있음. 멤버변수 선언. 
             
         private HikariDataSourceUtil() {  // 외부 객체 생성 불가. 멤버변수 초기화
             // HikariCP를 사용하기 위한 환경 설정 객체;

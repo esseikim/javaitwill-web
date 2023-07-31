@@ -14,11 +14,11 @@ import com.itwill.post.model.Post;
 import com.itwill.post.service.PostService;
 
 /**
- * Servlet implementation class PostSerchController
+ * Servlet implementation class PostSearchController
  */
-@WebServlet(name = "postSerchController", urlPatterns = {"/post/serch"}) // update 요청이 들어왔을 때 그 요청을 처리하는 controller
+@WebServlet(name = "postSearchController", urlPatterns = {"/post/search"}) // update 요청이 들어왔을 때 그 요청을 처리하는 controller
 
-public class PostSerchController extends HttpServlet {
+public class PostSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory.getLogger(PostDeleteController.class);
     // controller는 service 사용하므로
@@ -37,7 +37,7 @@ public class PostSerchController extends HttpServlet {
         Post post = postService.serchByValues(category, keyword);
         request.setAttribute("post", post);
         
-        request.getRequestDispatcher("/WEB-INF/post/modify.jsp") // 요청 받고 해당폴더로감, forward방식으로 
+        request.getRequestDispatcher("/WEB-INF/post/modify.jsp") // 요청 받고 해당 폴더로 감, forward 방식으로 
         .forward(request, response);  
         
 

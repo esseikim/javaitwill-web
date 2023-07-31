@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="postCreateController", urlPatterns= {"/post/create"}) 
 // tomcat이 찾을 수 있는 name. 링크 클릭시 실행될 주소
+// 웹어플리케이션 서버인 tomcat이 서블릿 주소(urlPatterns)를 보고 (name으로 찾고), get/post 방식인지 보고 호출했다. 
 public class PostCreateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -40,7 +41,8 @@ public class PostCreateController extends HttpServlet {
 	        request.getRequestDispatcher("/WEB-INF/post/create.jsp")  
 //	        현재 요청을 /WEB-INF/post/list.jsp로 전달하기 위한 RequestDispatcher 인스턴스를 반환
 	        .forward(request, response);
-// 각각의 서블릿 클래스들의 url 패턴을 보고, 활용하면 됨. 웹서블릿에서 매핑시킨 url주소와 일치시키면 됨. main만 다름. 
+// 각각의 서블릿 클래스들의 url 패턴을 보고, 활용하면 됨. 웹서블릿에서 매핑시킨 url주소와 일치시키면 됨."/WEB-INF/post/create.jsp"
+// main만 다름(urlPatterns = {""}, "/WEB-INF/main.jsp") 
 	}
 	
 	@Override
@@ -53,17 +55,17 @@ public class PostCreateController extends HttpServlet {
 	        String content = req.getParameter("content"); 
 	        String author = req.getParameter("author");
 	        
-	        Post post = new Post(0, title, content, author, null, null); // 시간 정보 필요없고, 기본값 0 사용
+	        Post post = new Post(0, title, content, author, null, null); // 시간 정보 필요 없고, 기본값 0 사용
 	        // 서비스 계층의 메서드를 호출해서 DB에 포스트를 저장. 
 	        int result = postService.create(post); 
 	       log.info("create result = {}", result);
 	        
 	        // 포스트 목록 페이지로 이동(redirect) - 주소 바뀜. postCreate가 아닌 postList로 바뀜. jsp로 가는 게 아님
-	        resp.sendRedirect("/post/post");  // <-/post: contextroot.  post: 목록보기     요청주소: /contextroot/path
+	        resp.sendRedirect("/post/post");  // <-/post: contextroot.  post: 목록보기  요청주소: /contextroot/path
 	        // 응답해서 클라이언트가 받게됨. 클라이언트는 다시 get 방식으로 요청을 보냄 post redirect get! 두개의 메서드가 jsp 불러주고, jsp가 화면에 그려 응답! 
 	        
 	        // PRG(Post-Redirect-Get) 패턴.  get 방식: jsp로 바로 forward. post: 새로운 페이지로 아예 이동을 해버리는 경우. 
-	        /*목록 클릭: 요청, get 방식. 메인: 테이블(번호, 제목, 작성자, 수정시간)<- 목록을 보려면 db까지 갔다와야함. 
+	        /* 목록 클릭: 요청, get 방식. 메인: 테이블(번호, 제목, 작성자, 수정시간)<- 목록을 보려면 db까지 갔다와야 함. 
 	         * controller(ser) service(dao) dao(select 쿼리 실행) 받은 arraylist 리턴 : controller가 리스트 jsp에 넘겨줌. jsp가 화면에 그림 
 	         * 새 글 작성: 제목, 아이디, ..입력하세요 (db까지 갔다올 필요 없고, 클릭 시 페이지 보여주기만 하면 됨. 새글 작성(get방식), jsp가 form만 만들어줌. service까지 갈 필요 없음)
 	         * 작성 완료: form 안에 있음. 버튼은 요청을 보내는데, post 방식. 요청을 처리하는 컨트롤러로 감 (/post/create) 

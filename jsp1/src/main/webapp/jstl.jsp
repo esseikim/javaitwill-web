@@ -13,7 +13,7 @@
 		<h1>JSTL</h1>
         <h2>JSP Standard Tag Library</h2>
         <%-- JSTL 사용하기 
-            1. POM.xml 파일에 의존성(dependency) 추가(jstl:jstl:1.2) 그룹아이디:아티펙트 아이디:버전 번호
+            1. POM.xml 파일에 의존성(dependency) 추가(jstl:jstl:1.2) 그룹아이디:아티펙트아이디:버전번호
             2. JSTL을 사용하는 JSP 파일에서 taglib 지시문을 설정.
         --%>
         
@@ -86,9 +86,10 @@
                    <th>전화번호</th> 
                    <th>이메일</th> 
             </tr>
+            </thead>
             <tbody>
                      <c:forEach items="${ contacts }"  var="c"> 
-                     <%--list에서 꺼낸 변수들을 c(contact 타입)에 집어 넣겠다. 멤버변수들만 써주면 getter 메서드를 찾아서 써줌. 
+                     <%--list에서 꺼낸 변수들을(Contact 타입) c에 집어 넣겠다. 멤버변수들만 써주면 getter 메서드를 찾아서 써줌. 
                      getter 메서드 필수 (el에서 getter메서드를 찾기 위해선 관습을 잘 지켜야함.)
                      안에서는 el을 쓰면 됨. el 안에서는 jsp가 가진 지역변수 접근 불가. page,request, session, application에 저장된 변수 이름만 접근 가능.  --%>
                             <tr>
@@ -99,7 +100,6 @@
                                 </tr>                      
                      </c:forEach> 
             </tbody>
-            </thead>
       </table>  
       
       

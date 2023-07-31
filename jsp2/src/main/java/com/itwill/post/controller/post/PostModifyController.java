@@ -23,7 +23,8 @@ public class PostModifyController extends HttpServlet {
     
 	private static final Logger log = LoggerFactory.getLogger(PostModifyController.class);
 	
-	private final PostService postService = PostService.getInstance();// 컨트롤러는 서비스 이용함. 많은 컨트롤러에서 동일한 서비스를 이용해야함 -> 싱글톤정의 
+	private final PostService postService = PostService.getInstance();
+	// 컨트롤러는 서비스 이용함. 많은 컨트롤러에서 동일한 서비스를 이용해야함 -> 싱글톤 정의 
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

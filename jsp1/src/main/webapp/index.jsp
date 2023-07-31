@@ -7,7 +7,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>JSP</title>
-    </head>wq`      
+    </head>    
     <body>
         <h1>Index</h1>
         
@@ -16,7 +16,7 @@
                 <a href="ex1">First Servlet</a> 
                 <!-- 상대경로 링크 지정: servlet 주소 -> 
                 http://localhost:8081/jsp1/ 만 사용해도 뜸 web.xml에서
-                 welcome-file-list에서 파일 이름이 지정이 안 되어 있을 댸 해당 파일 이름이 열림.-->
+                 welcome-file-list에서 파일 이름이 지정이 안 되어 있을 때 해당 파일 이름이 열림.-->
             </li>
             <li>
                 <a href="ex2">second Servlet</a> <!-- ex2를 처리할 수 있는 jsp나 Servlet이 존재하지 않기에 -->
@@ -55,11 +55,11 @@
             <li>
                 <a href= "form2-result.jsp?username=admin&color=b">클릭 1</a>
                    <!-- rqparameter 만들어줘야함. 쿼리문으로 넘겨줘야 함(전송해줘야함.).
-                    그렇지 않으면 nullpointerException  발생. equals. 하고 들어갈 때!
+                    그렇지 않으면 nullpointerException 발생. equals. 하고 들어갈 때!
                    rqp를 구분하기 위해 &를 씀 
-                   &: 구분이 아닌, 앤드 자체를 username에 포함되는 문자열에 넣어주고 싶음. 실제로 전달하는 데이터 중 하나고 싶으면
+                   &: 구분이 아닌, 앤드 자체를 username에 포함되는 문자열에 넣어주고 싶음. 실제로 전달하는 데이터 중 하나이고 싶으면
                    = x: 변수 이름만 있고 값이 없는 상태. 
-                    &의 utf 코드값을 넣어주면 됨.   <-  %26
+                    &의 UTF-8 코드값을 넣어주면 됨.   <-  %26
                     직접  url을 만드는 것보다 jstl 태그 라이브러리를 통해 url을 만들어주는 게 좋음  
                    -->
             </li>

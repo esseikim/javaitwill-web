@@ -9,9 +9,9 @@ import com.itwill.post.repository.UserDao;
 public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
     
-    private final UserDao userDao = UserDao.getInstance();
+    private final UserDao userDao = UserDao.getInstance(); // repository 
     
-    private static UserService instance = null;
+    private static UserService instance = null; // service 
     
     private UserService() {}
     
@@ -28,8 +28,8 @@ public class UserService {
     public User signIn(String username, String password) {
         log.info("signIn(username = {}, password = {}", username, password);
         
-        User test = new User(0, username, password, null, 0);
-        User result = userDao.selectByUsernameAndPassword(test);
+        User test = new User(0, username, password, null, 0); // model 
+        User result = userDao.selectByUsernameAndPassword(test);  // repository 
         
         return result;
     }

@@ -47,7 +47,7 @@ public class MvcServlet extends HttpServlet {
 	 *  request를 JSP로 포워딩!      request.getRequestDispatcher("/WEB-INF/view.jsp").
 	 *  jsp에서는 now 변수를 el로 사용 가능함. (jsp의 태그들과 el을 통해서 html을 만들어냄.)
 	 *  
-	 *  db에서 select한 코드를 가져오면 arraylist 만들 수 있음. 그 lis t를 setattribute하면 됨. 
+	 *  db에서 select한 코드를 가져오면 arraylist 만들 수 있음. 그 list를 setattribute하면 됨. 
 	 *  
 	 *  model 1: jsp에서 요청처리 및 뷰 생성처리: 요청 처리 코드와 뷰 생성코드가 뒤섞여 코드가 복잡함. 
 	 *  mvc를 활용한 웹 어플리케이션 구조

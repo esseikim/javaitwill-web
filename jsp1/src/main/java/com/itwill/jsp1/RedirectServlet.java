@@ -29,7 +29,7 @@ public class RedirectServlet extends HttpServlet {
 	    // 최초 요청 주소(URL)가 이동하는 페이지로 변경.
 	    // 최초 요청의 request 객체와 response 객체가 이동하는 페이지로 전달되지 않음.
 	    // 같은 웹 서버만이 아니라, 외부 서버의 페이지로도 이동이 가능.
-	   // response.sendRedirect("https://www.daum.net/");
+	    // response.sendRedirect("https://www.daum.net/");
 	    
 	    
 	    

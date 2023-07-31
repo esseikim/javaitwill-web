@@ -48,6 +48,8 @@ public class PostUpdateController extends HttpServlet {
 	            17:08:57.371 [http-nio-8081-exec-29] INFO  com.itwill.post.service.PostService - read(24)
 	            17:08:57.371 [http-nio-8081-exec-29] INFO  com.itwill.post.repository.PostDao - select(id=24)
 	            17:08:57.371 [http-nio-8081-exec-29] INFO  com.itwill.post.repository.PostDao - select * from POSTS where ID = ?*/
+	
+	    // context root 제외("" -> post),  context root부터 표기 -> contextroot, 목록보기, 해당포스트   
 	}
 
 	

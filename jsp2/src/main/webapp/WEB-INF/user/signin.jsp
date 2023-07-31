@@ -12,8 +12,8 @@
         </header>
         
         <main>
-            <%-- action:요청을 보내는 주소 작성, 지정을 안 할 경우 현재 주소 그대로 --%>
-            <form  method="post">
+            <%-- action: 요청을 보내는 주소 작성, 지정을 안 할 경우 현재 주소 그대로 --%>
+            <form method="post">
                 <div>
                     <%-- required: 필수입력 --%>
                     <input type="text" name="username" required autofocus placeholder="사용자 아이디 입력" />

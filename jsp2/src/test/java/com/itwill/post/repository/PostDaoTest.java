@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.itwill.post.model.Post;
 
-public class PostDaoTest {  // db 연결, dao! service는 여기서 만든 메서드를 호출하면 됨. 테스트 메서드 가져다 쓰듯이! service는 또 controller와 연결 
+public class PostDaoTest {  // db 연결, dao! service는 여기서(service) 만든 메서드를 호출하면 됨. 테스트 메서드 가져다 쓰듯이! service는 또 controller와 연결 
 
         private static final Logger log = LoggerFactory.getLogger(PostDaoTest.class);
             

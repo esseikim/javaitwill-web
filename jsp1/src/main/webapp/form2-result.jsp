@@ -9,7 +9,7 @@
                 <% 
                 // 요청 파라미터의 한글이 깨지지 않도록 하기 위해서: 
                 request.setCharacterEncoding("UTF-8");
-                // 요청 파라미터 값 찾기:      요청에 포함된 요청 파라미터 값 찾는 메서드. form에서 설정한 name 속성의 값. 
+                // 요청 파라미터 값 찾기: 요청에 포함된 요청 파라미터 값 찾는 메서드. form에서 설정한 name 속성의 값으로 찾음.
                 // 아닌 경우에만 else 실행
                 String username = request.getParameter("username");
                 String color =request.getParameter("color");
@@ -24,7 +24,7 @@
                 %>
                 
                 <c:set var="colorValue2" value="black"></c:set>
-                <!-- 변수선언, 값. rqparm 중 color 사용 el에서는 ==로 비교, 이퀄스 사용 x, 큰 따옴표 가리지 않지만, 미관상 ''
+                <!-- 변수선언, 값. rqparm 중 name=color 사용. el에서는 ==로 비교, 이퀄스 사용 x, 큰 따옴표 가리지 않지만, 미관상 ''
                 만약 파라미터 값이 r과 같으면 color 변수를 red로 설정하겠다
                 자바 코드와 비슷하지 않음. 태그들로 이루어짐. if 뿐임. else 없음. 
                 조건을 만족하는지 전부 검사를 함. 
@@ -55,7 +55,7 @@
                 <h2>JSP</h2>
                 <h3>아이디: 
                    <span id= "span1"><%= username %></span>
-                </h3><%--요청 파라미터에 있는 값을 이자리에 쓰겠다. el로 표시한 것.  색 지정을 위해 span 사용
+                </h3><%--요청 파라미터에 있는 값을 이 자리에 쓰겠다. el<-스크립트릿로 표시한 것. 색 지정을 위해 span 사용
                    username=오쌤&color=r  두개의 요청 파라미터가 전달됨. 
                    --%>
                    
@@ -74,6 +74,6 @@
                                     <h2>일반 사용자 페이지</h2>
                             </c:otherwise>
                     </c:choose>      <!--선택하겠다는 코어태그. 
-                    if를 대체할 수 있는 choose: switch, when: case, otherwise: default 검사를 한번만 하기-->             
+                    if를 대체(else 없음)할 수 있는 choose: switch, when: case, otherwise: default 검사를 한번만 하기-->             
 		</body>
 </html>

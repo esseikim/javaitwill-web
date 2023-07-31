@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.itwill.post.datasource.HikariDataSourceUtil;
 import com.itwill.post.model.Post;
 import com.zaxxer.hikari.HikariDataSource;
-
+// 여러개의 메서드(dao)를 사용해서 서비스 만듦. 여기도 dao 싱글톤 패턴으로 작성 <- PostService.java 참고
 // Repository(Persistance) Layer(저장소/영속성(-영구적 저장) 계층) 
 // DB CRUD(Cread, Read, Update, Delete) 작업을 수행하는 계층.  
 public class PostDao {
@@ -24,10 +24,10 @@ public class PostDao {
 
     private static PostDao instance = null;
 
-    private HikariDataSource ds; // 데이터소스이용하는 싱글톤 객체. 이걸 이용해서 sql 이용함.
+    private HikariDataSource ds; // 데이터소스 이용하는 싱글톤 객체. 이걸 이용해서 sql 이용함.
 
     private PostDao() {
-        ds = HikariDataSourceUtil.getInstance().getDataSource(); // ds 이용가능.
+        ds = HikariDataSourceUtil.getInstance().getDataSource(); // dao는 ds(데이터 소스) 이용가능.
     };
 
     public static PostDao getInstance() {
@@ -55,7 +55,7 @@ public class PostDao {
             while (rs.next()) {
                 // rs가 몇개 있는 지 모름. 테이블 컬럼 내용을 Post 타입 객체로 변환하고 리스트에 추가:
                 // 전체 검색이든, primary key로 하든 똑같은 일을 할 것.
-                Post post = recordToPost(rs); // 테이블 행을 post 타입으로 변환. 컬럼 내용(rs)을 알아야함. 아규먼트로 넘겨줌
+                Post post = recordToPost(rs); // 테이블 행을 Post 타입으로 변환. 컬럼 내용(rs)을 알아야함. 아규먼트로 넘겨줌
                 list.add(post);
             }
             log.info("# of rows = {}", list.size()); // 행의 개수 출력
@@ -120,7 +120,8 @@ public class PostDao {
             stmt.setString(2, post.getContent());
             stmt.setString(3, post.getAuthor());
 
-            result = stmt.executeUpdate();
+            result = stmt.executeUpdate(); // 비교: rs = stmt.executeQuery();
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -147,7 +148,7 @@ public class PostDao {
         log.info("select(id={})", id); // 메서드 호출 확인. stringformat, printf -> select(7)
         log.info(SQL_SELECT_BY_iD);
 
-        Post posts = null;
+        Post posts = null;  // 리스트로 만들어줘야 하는 것 아닌가? 검색 결과가 여러개일 수도 있지않나. 코드 다시 보기
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -243,8 +244,8 @@ public class PostDao {
     private static final String SELECT_TWO = "select * from POSTS where title like? or where content like ?";
     private static final String SELECT_AUTHOR = "select * from POSTS where author like ?";
 
- public Post serchValues(String category, String keyword) {
-        log.info("serch({})");
+ public Post searchValues(String category, String keyword) {
+        log.info("search({})");
         
         Post post = null;
         Connection conn = null;

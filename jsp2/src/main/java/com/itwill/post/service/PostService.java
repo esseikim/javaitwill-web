@@ -12,7 +12,7 @@ import com.itwill.post.repository.PostDao;
 // -> 서비스는 dao를 멤버변수로 가지고 있어야 select 메서드를 호출 가능함. 
 
 // Service(Business) layer(서비스/비지니스 계층)
-// Repository 계층의 메서드들을 사용해서 서비스를 만듦.  여러개의 메서드(dao)를 사용해서 서비스 만듦. 여기도 싱글톤 패턴으로 작성
+// Repository 계층의 메서드들을 사용해서 서비스를 만듦. 여러개의 메서드(dao)를 사용해서 서비스 만듦. 여기도 싱글톤 패턴으로 작성
 public class PostService {
     
     // Slf4j 로깅 기능 사용:
@@ -63,7 +63,7 @@ public class PostService {
 
     public Post serchByValues(String category, String keyword) {
         log.info("serchValues({})", category, keyword);
-        return postDao.serchValues(category, keyword);
+        return postDao.searchValues(category, keyword);
     }
 
     
