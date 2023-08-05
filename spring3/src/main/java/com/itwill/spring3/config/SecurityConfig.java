@@ -19,15 +19,23 @@ import org.springframework.stereotype.Controller;
 
 // application.properties의 텍스트 파일을 제외하곤 xml 파일로 설정 x. 자바 클래스 이용하여 설정
 // Spring legacy의 bean 생성: application.xml 
+
+// 상속관계: Bean ->Component -> Cont, Serv, Rep : @ bean을 생성해주는 에너테이션.
+// 스프링이 bean을 가지고있다가 필요한 곳에서 쓸 수 있도록 넣어줌
+// 빈 생성, 관리. 빈들을 가지고 있는 상자 -> 스프링 컨테이너(프레임워크)
+
 // Spring security filter/DPS는 UserDetailsService을 찾고 사용자 상세정보를 만들어줌
 // 그래서 해당 클래스(UserDetailsService)를 상속받아야 그대로 동작이 가능함.
+// UserDetailsService: 로그인 필터가 사용자 정보를 가져오고자 하는 클래스.
+// -> 클래스 에서 UserDetailsService를 구현해야 로그인 필터가 사용자 정보를 가지고 올 수 있음.
+// -> 또한, UserDetailsService에는 userDetails 정보가 꼭!! 필요함.
 
-// 상속관계: Bean ->Component -> Cont, Serv, Rev : @ bean을 생성해주는 에너테이션.
-// 스프링이 bean을 가지고있다가 필요한 곳에서 쓸 수 있도록 넣어줌
-// 빈 생성, 관리. 빈들을 가지고 있는 상자 -> 스프링 컨테이너 
 
-@EnableMethodSecurity // Controller 메서드에서 security 설정
+
 // @EnableWebSecurity  // 우리가 설정한 웹 시큐리티 설정에 따라 웹 시큐리티를 실행시킴. <- /**/ 사용
+
+// 환경설정. 
+@EnableMethodSecurity // Controller 메서드에서 security 설정
 @Configuration // 객체 생성. 스프링 컨테이너에서 빈(웹 -bean. 자바 -객체)으로 생성, 관리 - 필요한 곳에 의존성 주입
 public class SecurityConfig {  
     
@@ -44,14 +52,17 @@ public class SecurityConfig {
         
         
         // 로그인할 때 사용할 임시 사용자(메모리에 임시 저장) 생성
+        /*
         @Bean
         public UserDetailsService inMemoryUserDetailsService() {
             // 웹서비스를 이용할 수 있는 사용자 상세정보
-            //  UserDetails  : DB에 들어가는 유저 정보. 일종의 entity. 그 정보를 DB에서 검색이 아닌 임의로 만든다.   
+            // repository가 됨. 임시로 생성한 일종의 Entity가 됨
+        	
+            // UserDetails  : DB에 들어가는 유저 정보. 일종의 entity. 그 정보를 DB에서의 검색이 아닌 임의로 만든다.   
             UserDetails  user1 = User
                         .withUsername("user1") // 로그인할 때 사용할 사용자 이름
                         .password(passwordEncoder().encode("1111")) // 로그인할 때 사용할 비밀번호
-                        .roles("USER") // 사용지 권한(USER, ADMIN,...). USER 권한을 가진 사람들만 접근 가능
+                        .roles("USER") // 사용지 권한(USER, ADMIN,...). USER 권한을 가진 사람들만 접근 가능. 사용자에 따른 페이지 구분 가능. 
                         .build(); //  UserDetails 객체 생성.
                 
             UserDetails  user2 = User
@@ -72,38 +83,41 @@ public class SecurityConfig {
             // 이 클래스를 구현하게 되면, filter가 UserDetailsService를 이용할 수 있음. 
             // 이 클래스는 UserDetails(사용자 정보)를 가지고 있어야 함. 
             // filter: Controller로 가기 전 요청을 가로챔
-        }
+        }*/
         
+		// 찐 환경설정
         // Security Filter 설정 bean
-        // 로그인/로그아웃 설정
-        // 로그인 페이지 설정, 로그아웃 이후 이동할 페이지
+		// -> Security Filter: 로그인 관련된 인증 필터 
+        // 로그인/로그아웃 설정, 로그인 페이지 설정, 로그아웃 이후 이동할 페이지, 
         // 페이지 접근 권한 - 로그인해야만 접근 가능한 페이지, 로그인 없이 접근 가능한 페이지 설정
+		// 다음 securityFilterChain 설정을 했기에 로그인 없이 들어가짐.(~97까지 만듦) -> 페이지 권한 설정을 안 했기에, 
         @Bean  // 스프링컨테이너가 이 메서드 호출하여 Bean 생성, 관리 -> 필요한 곳에 주입
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            // CSRF(Cross Site Request Forgery) 기능 활성화하면, 
+            // CSRF(Cross Site Request Forgery) 기능 활성화하면, 보안은 좋음 
             // Ajax POST/PUT/DELETE 요청에서 CSRF 토큰을 서버로 전송하지 않으면 403 에러가 발생
             // -> CSRF 기능 비활성화 
-          
             http.csrf((csrf) -> csrf.disable());  // 익명함수로 넘겨줘야.(람다표현식) 
             
             // 로그인 페이지 설정 - 스프링에서 제공하는 기본 로그인 페이지를 사용. 
-            http.formLogin(Customizer.withDefaults());  // form을 이용해서 로그인함(기본 페이지). Customizer를 이용해 커스텀 페이지 적용 가능. 
+            // form을 이용해서 로그인 함(기본 페이지). Customizer.를 이용해 커스텀 페이지(개인 설정 로그인 페이지) 적용 가능. 
+            http.formLogin(Customizer.withDefaults());  
             
-            // 로그아웃 이후 이동할 페이지: contextroot(메인페이지)
+            // 로그아웃 이후 이동할 페이지: contextroot -> 메인페이지로 이동
             http.logout((logout) -> logout.logoutSuccessUrl("/")); 
            
             
-            // 페이지마다의 접근 권한 설정
+            // 페이지마다의 접근 권한 설정 -> 순서 중요 
+            // authRequest: 접근 권한을 설정할 수 있는 객체
+            // (/post/details) -> **: 하위 주소(/details)가 몇 단계가 와도 상관없음 
             /*
             http.authorizeHttpRequests((authRequest) -> 
-            authRequest // 접근 권한을 설정할 수 있는 객체
             // 권한이 필요한 페이지들을 설정
             .requestMatchers("/post/create", "/post/details", "/post/modify", 
-                    "/post/update", "/post/delete", "/api/reply/**") // 익명사용자는 댓글 x
+                    "/post/update", "/post/delete", "/api/reply/**") //  "/api/reply/**": 익명사용자는 댓글 x. 
             .hasRole("USER") // 위에서 설정한 페이지(요청주소)들이 USER 권한을 요구함을 설정
-            .requestMatchers("/**")  // 이외의 모든페이지. 요청주소 /post/create 처럼 /post 뒤의 하위주소가 몇단계가 있어도 됨. 
+            .requestMatchers("/**")  // :위 페이지 이외의 모든페이지. 요청주소 /post/create 처럼 /post 뒤의 하위주소가 몇단계가 있어도 됨. 
                                                        // . anyRequest() 와 동일. 어떤 요청이든지.  
-            // .authenticated() 인증완료. 권한 여부 상관없이 아이디/비밀번호가 일치하면
+            // .authenticated() 인증완료. 즉, 권한 여부 상관없이 아이디/비밀번호가 일치하면
             .permitAll()   // 권한없이 접근 허용. 
                     ); // 추상메서드 구현
             */

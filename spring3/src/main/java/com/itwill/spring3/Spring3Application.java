@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 // post: 도메인, postrepository: repository 계층의 class
 
 @Slf4j
-@EnableJpaAuditing  // JPA Auditing 기능 활성화.  BaseTimeEntity 클래스와 연결
+@EnableJpaAuditing  // JPA Auditing 기능 활성화. BaseTimeEntity 클래스와 연결  -> 반드시 main class에 작성하기
 @SpringBootApplication
 public class Spring3Application {
 

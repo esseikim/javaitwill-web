@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http:://www.thymeleaf.org"
-           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-           layout:decorate="~{layout/base_layout}">
-        
-        <main layout:fragment="main">
-                <div class="my-2 card">
-                        <div class="card-header text-center">
-                             <h1>포스트 수정 페이지</h1>
-                        </div>
-                        <div class="card-body">
-                                    <form id="postModifyForm">
-                                            <div>
-                                                    <label class="form-label"  for="id">번호</label>
-                                                    <input class="form-control"  id="id"  th:value="${post.id}"  name="id"  readonly />
-                                            </div>
-                                            <div>
-                                                    <label class="form-label"   for="title">제목</label>
-                                                    <input class="form-control"  id="title"  th:value="${post.title}"  name="title" />
-                                            </div>
-                                            <div>
-                                                     <label class="form-label"   for="content">내용</label>
-                                                     <textarea class="form-control"  id="content"  th:text= "${post.content}"  name="content" ></textarea>
-                                            </div>
-                                            <div>
-                                                    <label class="form-label"   for="author">작성자</label>
-                                                    <input class="form-control"  id="author"  th:value="${post.author}"   readonly/>
-                                            </div>
-                                    </form>
-                                    
-                                    <!-- 로그인 사용자와 포스트 작성자가 같을 때만 삭제, 업데이트 버튼을 보여줌. -->
-                                    <div th:if="${ #authentication.name } == ${ post.author }">
-                    <!-- 
-                            버튼 또는 input type=submit이 폼 안에 있는 경우: 
-                            무조건 submit -> get 방식(요청 주소가 ?id = {}&title ={}&content={}으로 변화)
-                            ==> form에서 요청 방식을 지정하지 않았기에 get방식으로 넘어감. action 주소도 지정안함.
-                    -->
-                                            <button class="btn btn-outline-danger"  id="btnDelete"  >삭제</button>
-                                            <button class="btn btn-outline-success"  id="btnUpdate"  >업데이트</button>
-                                    </div>
-                          </div>     
-                </div>
-        </main>
-        
-         <!-- layout:decorate="~{layout/base_layout}"로 지정 -> myscripts로 저장한 fragment 위치에 아래 내용이 들어감. -->
-        <th:block layout:fragment="myscripts">
-                <script src="/js/post/modify.js"></script>  
-        </th:block>
-        
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/base_layout}">
+
+<main layout:fragment="main">
+	<div class="my-2 card">
+		<div class="card-header text-center">
+			<h1>포스트 수정 페이지</h1>
+		</div>
+		<div class="card-body">
+			<form id="postModifyForm">
+				<div>
+					<label class="form-label" for="id">번호</label> 
+					<input class="form-control" id="id" th:value="${post.id}" name="id" readonly />
+				</div>
+				<div>
+					<label class="form-label" for="title">제목</label> 
+					<input class="form-control" id="title" th:value="${post.title}" name="title" />
+				</div>
+				<div>
+					<label class="form-label" for="content">내용</label>
+					<textarea class="form-control" id="content" th:text="${post.content}" name="content"></textarea>
+				</div>
+				<div>
+					<label class="form-label" for="author">작성자</label> 
+					<input class="form-control" id="author" th:value="${post.author}" readonly />
+				</div>
+			</form>
+
+			<!-- 로그인 사용자와 포스트 작성자가 같을 때만 삭제, 업데이트 버튼을 보여줌. -->
+			<div th:if="${ #authentication.name } == ${ post.author }">
+				<!-- 
+                  버튼 / input type=submit이 폼 안에 있는 경우: 
+                  get 방식(요청 주소가 ?id = {}&title ={}&content={}으로 변화)
+                  ==> form에서 요청 방식을 지정하지 않았기에 get방식으로 넘어감. action 주소 미지정 -> 현재페이지 요청 -->
+				<button class="btn btn-outline-danger" id="btnDelete">삭제</button>
+				<button class="btn btn-outline-success" id="btnUpdate">업데이트</button>
+			</div>
+		</div>
+	</div>
+</main>
+
+<!-- layout:decorate="~{layout/base_layout}"로 지정 -> myscripts로 저장한 fragment 위치에 아래 내용이 들어감. -->
+<th:block layout:fragment="myscripts">
+	<script src="/js/post/modify.js"></script>
+</th:block>
+
 </html>

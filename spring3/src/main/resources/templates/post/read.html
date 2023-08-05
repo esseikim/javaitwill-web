@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http:://www.thymeleaf.org"
-           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-           layout:decorate="~{layout/base_layout}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/base_layout}">
 
-        <main layout:fragment="main">
-                <div class="my-2 card">
-                            <div class="card-header text-center">
-                                    <h1> 포스트 목록 페이지</h1> 
-                            </div>
-                             <div class="card-body">
-                                     <table class="table table-hover ">
-                                                <thead>  <!-- 테이블의 컬럼이름 -->
-                                                        <tr>
-                                                              <th>번호</th>
-                                                              <th>제목</th>
-                                                              <th>작성자</th>
-                                                              <th>수정시간</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                        <tr th:each="post : ${posts}">
-                                                                <td th:text="${post.id}" ></td>
-                                                                <td ><!-- 타임리프에서 링크: @ . 링크 클릭(get 방식)에서 파라미터 전달: 쿼리스트링 -->
-                                                                        <a th:href="@{/post/details?id={id} (id = ${post.id}) }"
-                                                                             th:text="${post.title}"></a>
-                                                                </td>
-                                                                <td th:text="${post.author}" ></td>
-                                                                 <!-- 타임리프에서는 localDateTime을 사용해도 됨. -->
-                                                                <td th:text="${ #temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm:ss')}" ></td>
-                                                         </tr>
-                                                </tbody>
-                                    </table>
-                             <div class="card-footer">
-                                             <!-- 검색은 보통 get 방식 -->
-                                            <form method="get"  th:action="@{/post/search}"> 
-                                            <!-- 타임리프 경로생성: @, 나머지는 request param으로 전달됨 -->
-                                                    <div class="row">
-                                                            <div class="col-3"><!-- drop down 기능  -->
-                                                                    <select class="form-control" name="type"> <!-- serch type.  -->
-                                                                            <option value="t">제목</option> <!-- value의 기본값: 제목 -->
-                                                                            <option value="c">내용</option>
-                                                                            <option value="tc">제목 + 내용</option>
-                                                                            <option value="a">작성자</option>
-                                                                    </select>
-                                                            </div>
-                                                            <div class="col-8">
-                                                                    <input class="form-control"  name="keyword"
-                                                                    type="text"  placeholder="검색어 입력"  required  />
-                                                            </div>
-                                                            <div class="col-1">
-                                                                    <input  class="form-control btn btn-outline-dark" 
-                                                                     type="submit"  value="검색" />
-                                                            </div>
-                                                    </div>
-                                            </form>                            
-                                 </div>
-                         </div>
-                </div>
-        </main>
-        
+<main layout:fragment="main">
+	<div class="my-2 card">
+		<div class="card-header text-center">
+			<h1>포스트 목록 페이지</h1>
+		</div>
+		<div class="card-body">
+			<table class="table table-hover">
+				<thead>
+					<!-- 테이블의 컬럼이름 -->
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>수정시간</th>
+					</tr>
+				</thead>
+				<!-- 타임리프에서 링크: @. 링크 클릭(get 방식)에서 파라미터 전달: 쿼리스트링 -->
+				<tbody>
+					<tr th:each="post : ${posts}">
+						<td th:text="${post.id}"></td>
+						<td> <a th:href="@{/post/details?id={id} (id = ${post.id}) }" th:text="${post.title}"></a></td>
+						<td th:text="${post.author}"></td>
+						<!-- 타임리프에서는 localDateTime을 사용해도 됨. -->
+						<td th:text="${ #temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer"> <!-- 검색은 보통 get 방식 -->
+				<form method="get" th:action="@{/post/search}">
+					<!-- 타임리프 경로생성: @, 나머지는 request param으로 전달됨 -->
+					<div class="row">
+						<div class="col-3">  
+							<select class="form-control" name="type">  <!-- value의 기본값: 제목 -->
+								<option value="t">제목</option>
+								<option value="c">내용</option>
+								<option value="tc">제목 + 내용</option>
+								<option value="a">작성자</option>
+							</select>
+						</div>
+						<div class="col-8">
+							<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required />
+						</div>
+						<div class="col-1">
+							<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+
 </html>

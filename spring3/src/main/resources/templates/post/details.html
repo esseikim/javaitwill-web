@@ -1,84 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http:://www.thymeleaf.org"
-           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-           layout:decorate="~{layout/base_layout}">
-        
-        <main layout:fragment="main">
-                <div class="my-2 card">
-                        <div class="card-header text-center">
-                             <h1>포스트 상세보기 페이지</h1>
-                        </div>
-                        <div class="card-body">
-                                    <form >
-                                            <div>
-                                                    <label class="form-label"  for="id">번호</label>
-                                                    <input class="form-control"  id="id"  th:value="${post.id}"   readonly />
-                                            </div>
-                                            <div>
-                                                    <label class="form-label"   for="title">제목</label>
-                                                    <input class="form-control"  id="title"  th:value="${post.title}"   readonly />
-                                            </div>
-                                             <div>
-                                                     <label class="form-label"   for="content">내용</label>
-                                                     <textarea class="form-control"  id="content"  th:text= "${post.content}"  readonly></textarea>
-                                            </div>
-                                             <div>
-                                                    <label class="form-label"   for="author">작성자</label>
-                                                    <input class="form-control"  id="author"  th:value="${post.author}"   readonly/>
-                                            </div>
-                                            <div>
-                                                    <label class="form-label"   for="createdTime">작성시간</label>
-                                                    <input id="createdTime" class="form-control" 
-                                                                    th:value= "${ #temporals.format(post.createdTime, 'yyyy-MM-dd HH:mm:ss' )}"  readonly>  
-                                                                   <!--  #: 문자열 변환 시,  ${}: 타임리프 문법 -->
-                                             </div>
-                                               <div>
-                                                    <label class="form-label"   for="modifiedTime">수정시간</label>
-                                                    <input id="modifiedTime"  class="form-control" 
-                                                                    th:value= "${ #temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm:ss' )}"  readonly>  
-                                             </div>
-                                    </form>
-                                    
-                                    <!-- 로그인 사용자와 포스트 작성자가 같으면 수정 버튼을 보여줌. -->
-                                    <div th:if="${ #authentication.name } == ${ post.author }">
-                                             <!-- primary: 버튼 색상 파랑 -->
-                                                  <a class="btn btn-outline-primary"
-                                                            th:href="@{ /post/modify?id= {id} (id= ${post.id})}">수정하기</a>
-                                    </div>
-                              </div>
-                </div> <!-- card 끝 -->
-                
-   
-                <div class="my-2 card">
-                        <div class="card-header">
-                                <span>댓글</span>
-                                <span id="replyCount" th:text="${replyCount}"></span>개 <!-- 댓글개수: service를 통해 가져와야 함. model에 실려온 값을 타임리프 이용해 적용 -->
-                                <button class="btn btn-outline-dark"  id="btnToggleReply">보이기</button> 
-                        </div>
-                        <!-- 시작 태그와 엔드 태그가 있을 경우 -> th:text ,  시작 태그만 있을 경우 ->  th:value -->
-                        <div class="d-none" id="authName" th:text="${ #authentication.name }"></div>
-                        <div class="card-body collapse"  id="replyToggleDiv">  <!-- 토글 적용 -->
-                                   <div class="my-2 row">   <!--   block -> row   -->
-                                            <div class="col-10">
-                                                     <textarea class="form-control"  id="replyText"  placeholder="댓글 내용 입력"></textarea>
-                                            </div>
-                                            <div class="col-2">
-                                                        <button  class="form-control btn btn-outline-success"
-                                                                       id="btnReplyCreate">등록</button>
-                                            </div>
-                                   </div> 
-                                   
-                                  
-                                   <!-- 댓글 목록을 보여줄 영역 -->
-                                   <div class="my-2 row"  id= "replies"></div>
-                        </div>
-                </div>
-        </main>
-        
-        <th:block layout:fragment="myscripts">
-                <!-- axios 라이브러리 + https://axios-http.com/kr/docs/intro 참고   -->
-                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                <script src="/js/reply/reply.js"></script>
-        </th:block>
-        
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+
+<main layout:fragment="main">
+	<div class="my-2 card">
+		<div class="card-header text-center">
+			<h1>포스트 상세보기 페이지</h1>
+		</div>
+		<div class="card-body">
+			<form>
+				<div>
+					<label class="form-label" for="id">번호</label> 
+					<input class="form-control" id="id" th:value="${post.id}" readonly />
+				</div>
+				<div>
+					<label class="form-label" for="title">제목</label> 
+					<input class="form-control" id="title" th:value="${post.title}" readonly />
+				</div>
+				<div>
+					<label class="form-label" for="content">내용</label>
+					<textarea class="form-control" id="content" th:text="${post.content}" readonly></textarea>
+				</div>
+				<div>
+					<label class="form-label" for="author">작성자</label> 
+					<input class="form-control" id="author" th:value="${post.author}" readonly />
+				</div>
+				<div>
+					<label class="form-label" for="createdTime">작성시간</label> 
+					<input id="createdTime" class="form-control"
+						th:value="${ #temporals.format(post.createdTime, 'yyyy-MM-dd HH:mm:ss' )}" readonly />
+					<!--  #: 문자열 변환 시,  ${}: 타임리프 문법 -->
+				</div>
+				<div>
+					<label class="form-label" for="modifiedTime">수정시간</label> 
+					<input id="modifiedTime" class="form-control"
+						th:value="${ #temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm:ss' )}" readonly />
+				</div>
+			</form>
+
+			<!-- 로그인 사용자와 포스트 작성자가 같으면 수정 버튼을 보여줌. -->
+			<div th:if="${ #authentication.name } == ${ post.author }">
+				<a class="btn btn-outline-primary"
+					th:href="@{ /post/modify?id={id} (id= ${post.id})}">수정하기</a>
+			</div>
+		</div>
+	</div>
+	<!-- card 끝 -->
+
+
+	<div class="my-2 card">
+		<div class="card-header">
+			<span>댓글</span> <span id="replyCount" th:text="${replyCount}"></span>개
+			<!-- 댓글개수: service를 통해 가져와야 함. model에 실려온 값을 타임리프 이용해 적용 -->
+			<button class="btn btn-outline-dark" id="btnToggleReply">보이기</button>
+		</div>
+		<!-- 시작 태그와 엔드 태그가 있을 경우 -> th:text,  시작 태그만 있을 경우 ->  th:value -->
+		<div class="d-none" id="authName" th:text="${ #authentication.name }"></div>
+		<div class="card-body collapse" id="replyToggleDiv"> <!-- 토글 적용 -->
+			<div class="my-2 row"> <!--   block -> row   -->
+				<div class="col-10">
+					<textarea class="form-control" id="replyText" placeholder="댓글 내용 입력"></textarea>
+				</div>
+				<div class="col-2">
+					<button class="form-control btn btn-outline-success" id="btnReplyCreate">등록</button>
+			</div>
+		</div>
+	    <div class="my-2 row" id="replies"></div> <!-- 댓글 목록을 보여줄 영역 -->
+	    </div>
+	</div>
+</main>
+
+<th:block layout:fragment="myscripts">
+	<!-- axios 라이브러리 + https://axios-http.com/kr/docs/intro 참고   -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="/js/reply/reply.js"></script>
+</th:block>
+
 </html>
