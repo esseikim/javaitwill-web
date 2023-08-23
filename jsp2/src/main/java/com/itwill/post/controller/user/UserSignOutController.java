@@ -18,11 +18,8 @@ import org.slf4j.LoggerFactory;
 @WebServlet(name = "userSignOutController", urlPatterns = { "/user/signout" } )
 public class UserSignOutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private final Logger log = LoggerFactory.getLogger(UserSignOutController.class);
        
-    
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -33,12 +30,9 @@ public class UserSignOutController extends HttpServlet {
 		// Request 객체에서 Session 정보를 찾음.
 		HttpSession session = request.getSession();
 		
-		session.invalidate(); // Session을 무효화 -> 지움. -> 로그 아웃.
+		session.invalidate(); // Session을 무효화 - 지움. 로그 아웃.
 		
-		// 로그 아웃 이후에 로그인 페이지로 이동. -> 페이지 이동은 설정은 자율.
+		// 로그 아웃 이후에 로그인 페이지로 이동. > 페이지 이동은 설정은 자유.
 		response.sendRedirect("/post/user/signin");
 	}
-
-	
-
 }

@@ -2,58 +2,57 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<!-- namespace의 값은 PostRepository 인터페이스가 있는 패키지 이름과 인터페이스 이름 -->
+
+<!-- namespace의 값은 PostRepository 인터페이스가 있는 패키지 이름과 인터페이스 이름. -->
 <mapper namespace="com.itwill.spring2.repository.PostRepository">
-    
-    <!-- id의 값은 PostRepository 인터페이스에서 선언하는 메서드 이름 -->
-    <!-- sql문장 쓸 떄 ; 쓰지 말기 -->
-    
-    <insert id="insert">
-        insert into POSTS (TITLE, CONTENT, AUTHOR, CREATED_TIME,
-        MODIFIED_TIME)
-        values (#{title}, #{content}, #{author}, systimestamp, systimestamp) 
-         <!-- #{title}: 테이블의 model에서 맴버변수 + getter 메서드를 호출. -->
-    </insert>
 
-    <!-- resultType: select에만 있는 속성-> 리턴 타입이 존재하니까
-           리턴 타입이 Post가 됨. select 했으니깐 가져와서 담아야 함. 그걸 list<Post>에 담을 거임. 
-           resultType: 이 메서드의 리턴(도메인을 리턴) 타입. resultType을 원소로 갖는 리스트 한 행에 해당이 됨. 전체가 아님-->
-    <select id="selectOrderByIdDesc"
-        resultType="com.itwill.spring2.domain.Post">
-        select * from POSTS order by ID desc
-    </select>
+	<!-- id: PostRepository 인터페이스에서 선언하는 메서드 이름. -->
+	<!-- sql문장 쓸 떄 `;` 쓰지 말기. -->
 
-    <!-- id: 메서드 이름, #{id} 메서드를 만들 때 아규먼트로 전달해야 하는 값 -> 쿼리문의 ? 를 채우게 됨 -->
-    <select id="selectById"
-        resultType="com.itwill.spring2.domain.Post">
-        select * from POSTS where ID = #{id}  <!-- #{id}: ?로 변환. argument 전달 필요. -->
-    </select>
-
-    <!-- 리턴 타입은 정수. 아규먼트: 다음 각 getter(#{})를 가지고 있는 객체는 Post 객체. systimestamp: 오라클 내장 객체(시간) -->
-    <update id="updateTitleAndContent">
-        update POSTS
-        set TITLE = #{title}, CONTENT = #{content}, MODIFIED_TIME = systimestamp
-        where ID = #{id}
-    </update>
-
-    <delete id="deleteById">
-        delete from POSTS where ID = #{id}
-    </delete>
+	<!-- resultType: Post(Domain), select에만 있는 속성. select의 결과, resultType을 원소로 갖는 리스트 한 행. > list<Post>. -->
+	<select id="selectOrderByIdDesc"
+		resultType="com.itwill.spring2.domain.Post">
+		select * from POSTS order by ID desc
+	</select>
 
 
-    <!-- 테이블 join은 domain에서는 한 개의 테이블만 가능하기에 다음과 같이 설정. -->
-    <!-- PostListDto의 필드명과 동일하게 별명을 반드시 줘야 함 만약, 별명이 없으면 COUNT(R.id) 이대로 출력이 되기에 getter메서드를 사용할 수가 없음  -->
-    <!--  private long rcnt; // 댓글 개수  -->
-    <select id="selectWithReplyCount"
-        resultType="com.itwill.spring2.dto.PostListDto">
-        select P.ID, P.TITLE, P.AUTHOR, P.CREATED_TIME, count(R.ID) as RCNT,
-        count(r.id) as COUNT
-        from POSTS P left join REPLIES R
-        on P.ID = R.POST_ID
-        group by P.ID, P.TITLE, P.AUTHOR, P.CREATED_TIME
-        order by P.ID desc
+	<!-- 테이블 join. Domain에서는 한 개의 테이블만 가능, 다음과 같이 설정. -->
+	<!-- PostListDto의 필드명과 동일하게 별명을 반드시 줘야 함. 만약, 별명이 없으면 COUNT(R.id) 이대로 출력이 되기에 getter메서드를 사용할 수가 없음. -->
+	<!-- private long rcnt; // 댓글 개수. -->
+	<select id="selectWithReplyCount"
+		resultType="com.itwill.spring2.dto.PostListDto">
+		select P.ID, P.TITLE, P.AUTHOR, P.CREATED_TIME, count(R.ID) as RCNT 
+		from POSTS P left join REPLIES R
+		on P.ID = R.POST_ID
+		group by P.ID, P.TITLE, P.AUTHOR, P.CREATED_TIME
+		order by P.ID desc
+  </select>
 
-    </select>
 
+	<insert id="insert">
+		insert into POSTS (TITLE, CONTENT, AUTHOR, CREATED_TIME,
+		MODIFIED_TIME)
+		values (#{title}, #{content}, #{author}, systimestamp, systimestamp)
+		<!-- #{title}: 테이블의 Model에서 맴버변수 + getter 메서드를 호출. -->
+	</insert>
+
+
+	<!-- id: 메서드 이름, #{id} 메서드 생성 시 아규먼트로 전달해야 하는 값. -> 쿼리문의 `?`를 채우게 됨. -->
+	<select id="selectById"
+		resultType="com.itwill.spring2.domain.Post">
+		select * from POSTS where ID = #{id}  <!-- #{id}: ?로 변환. argument 전달 필요. -->
+	</select>
+
+
+	<!-- 리턴 타입은 정수. 아규먼트: 다음 각 getter(#{})를 가지고 있는 객체는 Post 객체. systimestamp: 오라클 내장 객체(시간). -->
+	<update id="updateTitleAndContent">
+		update POSTS
+		set TITLE = #{title}, CONTENT = #{content}, MODIFIED_TIME = systimestamp
+		where ID = #{id}
+	</update>
+
+
+	<delete id="deleteById">
+		delete from POSTS where ID = #{id}
+	</delete>
 </mapper>

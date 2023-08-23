@@ -3,9 +3,9 @@
  * /post/modify.jsp 에서 사용.
  */
 
-/* 1.두번째 인자: 이벤트 핸들러 리스너 함수. 
+/*  1. 이벤트 핸들러 리스너 함수. 
     2. element를 찾아 동작 등록. button 같은 element가 먼저 만들어져야 함.
-    DOMContentLoaded: documentobject들이 전부 만들어진 다음에 실행할 코드다.
+    DOMContentLoaded: documentobject들이 전부 만들어진 다음에 실행할 코드.
     function(): 콜백함수(익명함수) 
  */
 document.addEventListener('DOMContentLoaded', function() {
@@ -19,14 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const check = confirm('정말 삭제할까요?');
         
         // 사용자가 confirm 창에서 '확인'을 클릭했을 때.
-        // jsp 창에서 버튼들이 form 외부에 존재를 해도 다음 if문을 설정할 수가 있다. 
-        // -> 다음 아래는 form 내부에 값들을 처리하는 버튼을 작성하는 것이기에 버튼이 외부에 있어도 eventListener가 버튼의 작동을 정의하면 됨
+        // JSP에서 버튼이 form 외부에 존재를 해도 다음 if문을 설정할 수 있음. 
+        // -> form 내부의 값들을 처리, 버튼이 외부에 있어도 eventListener가 버튼의 작동을 정의하면 됨.
         if (check) {
-            modifyForm.action = './delete'; // 'delete'와 동일 // 폼 요청 주소
-            // form 제출(요청) 주소(요청 주소를 설정함). => '/delete'를  처리할 수 있는 controller를 만들어야 함.
-            // 현재 요청주소가 modify임 -> 삭제 버튼 클릭시 post까지 유지가 됨. 그 밑에서 주소만 delete라고 바꾸기를 원함.
-            modifyForm.method = 'post'; // 폼 요청 방식
-            modifyForm.submit(); // 폼 제출 -> 요청을 서버로 보냄
+            modifyForm.action = './delete'; // 'delete'와 동일 // 폼 요청 주소.
+            // 현재 요청주소: `/modify` -> 삭제 버튼 클릭시 `/post`까지 유지 > 주소 delete 변경.
+            modifyForm.method = 'post'; // 폼 요청 방식.
+            modifyForm.submit(); // 폼 제출 -> 요청을 서버로 보냄.
         }
     });
 

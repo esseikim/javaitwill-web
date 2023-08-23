@@ -47,9 +47,9 @@ public class StreamTest {
         List<LocalDateTime> times = Arrays.asList(
                 LocalDateTime.of(2023, 5, 23, 11, 30, 0),
                 LocalDateTime.of(2023, 5, 24, 12, 30, 0),
-                LocalDateTime.of(2023, 5, 25, 18, 00, 0)
+                LocalDateTime.of(2023, 5, 25, 18, 00, 0) 
         );
-        System.out.println(times);
+        System.out.println(times); // 2023-05-25T18:00, "T"는 날짜와 시간을 구분하는 구분자.
         
         // LocalDateTime 타입을 Timestamp 타입으로 변환
         List<Timestamp> timestamps = times.stream()

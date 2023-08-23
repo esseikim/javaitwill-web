@@ -11,18 +11,17 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder  // builder() -> static 내부 클래스 생성 - 맴버 변수(Post 클래스의 맴버 변수와 동일)
+@Builder // builder() -> static 내부 클래스 생성 - 맴버 변수(Post 클래스의 맴버 변수와 동일)
 @Getter
 @Setter
 @ToString
 public class Post {
-        
-    private long id;
-        private String title;
-        private String content;
-        private String author;
-        private LocalDateTime created_time;
-        private LocalDateTime modified_time;
-        
-        
+
+	private long id;
+	private String title;
+	private String content;
+	private String author;
+	private LocalDateTime created_time;
+	private LocalDateTime modified_time;
+
 }

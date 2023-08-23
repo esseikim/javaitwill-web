@@ -14,83 +14,75 @@ import com.zaxxer.hikari.HikariDataSource;
 
 // Repository(Persistence) 계층. 싱글톤 패턴.
 public class UserDao {
-    private static final Logger log = LoggerFactory.getLogger(UserDao.class);
-    
-    private HikariDataSource ds; // Connection Pool 객체 -> utill은 우리가 만든 것으로 주소와 아이디 비번만 있는 클래스이다. 연결을 하려면 다음으로 정하기.
-    
-    private static UserDao instance = null;
-    
-    private UserDao() {
-        ds = HikariDataSourceUtil.getInstance().getDataSource();
-    }
-    
-    public static UserDao getInstance() {
-        if(instance == null) {
-            instance = new UserDao();
-        }
-        
-        return instance;
-    }
-    
-    // 로그인 할 때 사용할 SQL:
-    private static final String SQL_SELECT_BY_USERNAME_AND_PASSWORD = "select * from USERS where username = ? and password = ?";
-    
-    /**
-     * argument로 전달된 user 객체의 username과 Password가 일치하는 정보를 찾으면 null이 아닌 값,
-     * 일치하는 정보를 찾을 수 없으면 null을 리턴.
-     * @param user
-     * @return
-     */
-    public User selectByUsernameAndPassword(User user) {
-        log.info("selectByUsernameAndPassword({})", user);
-        log.info(SQL_SELECT_BY_USERNAME_AND_PASSWORD);
-        
-        User result = null;
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        
-        try {
-            conn = ds.getConnection(); // connection pool에 Connection 객체를 빌려옴.
-            stmt = conn.prepareStatement(SQL_SELECT_BY_USERNAME_AND_PASSWORD);
-            
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
-            
-            rs = stmt.executeQuery();
-            
-            if(rs.next()) { // username과 password가 일치하는 행(레코드)가 있으면
-                result = recordToUser(rs);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-                conn.close(); // 빌려온 Connection 객체를 connection pool에 반환.
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        
-        
-        
-        
-        return result;
-    }
+	private static final Logger log = LoggerFactory.getLogger(UserDao.class);
 
-    private User recordToUser(ResultSet rs) throws SQLException {
-        
-        long id = rs.getLong("ID");
-        String username = rs.getString("USERNAME");
-        String password = rs.getString("PASSWORD");
-        String email = rs.getString("EMAIL");
-        long point = rs.getLong("POINT");
-        
-        
-        return new User(id, username, password, email, point);
-    }
+	private HikariDataSource ds; // Connection Pool 객체 -> Utill은 우리가 생성한 주소와 아이디 비밀번호가 있는 클래스. 연결을 위해선 다음으로 설정.
+
+	private static UserDao instance = null;
+
+	private UserDao() {
+		ds = HikariDataSourceUtil.getInstance().getDataSource();
+	}
+
+	public static UserDao getInstance() {
+		if (instance == null) {
+			instance = new UserDao();
+		}
+
+		return instance;
+	}
+
+	// 로그인 시 사용할 SQL:
+	private static final String SQL_SELECT_BY_USERNAME_AND_PASSWORD = "select * from USERS where username = ? and password = ?";
+
+	/**
+	 * argument로 전달된 user 객체의 username과 Password가 일치하는 정보를 찾으면 null이 아닌 값, 일치하는 정보를
+	 * 찾을 수 없으면 null을 리턴.
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public User selectByUsernameAndPassword(User user) {
+		log.info("selectByUsernameAndPassword({})", user);
+		log.info(SQL_SELECT_BY_USERNAME_AND_PASSWORD);
+
+		User result = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = ds.getConnection(); // Connection pool에서 Connection 객체를 빌려옴.
+			stmt = conn.prepareStatement(SQL_SELECT_BY_USERNAME_AND_PASSWORD);
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getPassword());
+			rs = stmt.executeQuery();
+			if (rs.next()) { // username과 password가 일치하는 행(레코드)가 있으면
+				result = recordToUser(rs);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close(); // 빌려온 Connection 객체를 connection pool에 반환.
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	private User recordToUser(ResultSet rs) throws SQLException {
+
+		long id = rs.getLong("ID");
+		String username = rs.getString("USERNAME");
+		String password = rs.getString("PASSWORD");
+		String email = rs.getString("EMAIL");
+		long point = rs.getLong("POINT");
+
+		return new User(id, username, password, email, point);
+	}
 }

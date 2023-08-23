@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- page 지시문: JSP 페이지의 설정. 컨텐트 타입 설정, 인코딩 설정, import 문장, ...
-     @와 Page 사이에서는 공백 유뮤 상관없음. 속성과 속성 사이 공백 필수
-  --%>    
+     @와 page 사이의 공백 유뮤 상관 없음. 속성과 속성 사이: 공백 필수  --%>    
+ 
 
 <!DOCTYPE html>
 <html>
@@ -15,15 +15,17 @@
 		<h1>JSP 소개</h1>
         <h2>Java Server Page</h2>
         
-        <%-- 선언문(declaration) --%>
+        <%-- 선언문(declaration):이 안에 Java 코드를 작성하여 해당 JSP 페이지가 변환될 때 생성되는 서블릿 클래스의 멤버 변수나 메서드를 선언할 수 있음 
+						 /* : 해당 선언문(JSP 선언문)이 어떤 역할을 하는지 설명하려고 작성--%>
         <%! /* Java block */
-        private static final String NAME = "scott"; // 상수 선언.
+        private static final String NAME = "scott"; // 상수 선언. 필드
         %>
         
-        <%-- 스크립트릿(scriptlet --%>
+        <%-- 스크립트릿(scriptlet) --%>
         <%
+		// 스크립트릿 블록 안에서는 자바 코드와 동일한 규칙이 적용되므로, 라인 주석(//)과 블록 주석(/* ... */)을 사용 가능 
         // 지역변수 선언:
-            LocalDateTime now = LocalDateTime.now(); // 서버 현재 시간. // '02' -> 숫자 2자리 출력. 한자리만 존재할 경우 앞 자리수는 0으로.
+            LocalDateTime now = LocalDateTime.now(); // 서버 현재 시간. // '%02d': 숫자를 두 자리로 표현. 1자리만 존재할 경우 앞 자리수는 '0'으로 출력. ex) 08, 11
             String timeStr = String.format("%d-%02d-%02d %02d:%02d:%02d",
                     now.getYear(), now.getMonthValue(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond());
             System.out.println("intro.jsp - scriptlet");

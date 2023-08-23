@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
-	<head>
-	  	<meta charset="UTF-8" />
-		<title>Post</title>
-	</head>
-	<body>
-		<header>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Post</title>
+    </head>
+    <body>
+        <header>
             <h1>로그인</h1>
         </header>
         
         <main>
-            <%-- action: 요청을 보내는 주소 작성, 지정을 안 할 경우 현재 주소 그대로 --%>
-            <form method="post">
+            <form method="post"> <%-- action: 요청 주소, 미지정 시 현재 주소 그대로를 요청. --%>
                 <div>
-                    <%-- required: 필수입력 --%>
-                    <input type="text" name="username" required autofocus placeholder="사용자 아이디 입력" />
+                    <input type="text" name="username" placeholder="사용자 아이디 입력" 
+                        required autofocus />
                 </div>
                 <div>
-                    <input type="password" name="password" placeholder="비밀번호 입력" required />
+                    <input type="password" name="password" placeholder="비밀번호 입력"
+                        required />
                 </div>
                 <div>
                     <input type="submit" value="로그인" />
@@ -27,5 +27,5 @@
             </form>
         </main>
         
-	</body>
+    </body>
 </html>

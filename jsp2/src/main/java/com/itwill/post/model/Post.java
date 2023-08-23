@@ -2,8 +2,8 @@ package com.itwill.post.model;
 
 import java.time.LocalDateTime;
 
-// 메인에서 웹서비스에서 이용되는 모델클래스를 작성하고, 이게 서버에서도 배포됨. 이 클래스를 test에서도 가져다 쓸 수 있음. 
-// MVC 아키텍쳐에서 Model에 해당하는 클래스 -  데이터베이스 테이블에 매핑되는 클래스.
+// 메인에서 웹서비스에서 이용되는 모델 클래스를 작성. 이게 서버에서도 배포됨. 이 클래스를 test에서도 가져다 쓸 수 있음. 
+// MVC 아키텍쳐에서 Model에 해당하는 클래스 <  데이터베이스 테이블에 매핑되는 클래스.
 public class Post {
     // filed
     private long id; // Primary Key
@@ -26,7 +26,7 @@ public class Post {
         this.modifiedTime = modifiedTime;
     }
     
-    // getters & setters   jstl/el에서 사용할 때 이름 제대로. 찾을 수 있도록. 이클립스 자동완성기능 이용
+    // getters & setters  < jstl/el에서 사용 수 있도록 관습에 따를 것. 
     public long getId() {
         return id;
     }
@@ -80,7 +80,4 @@ public class Post {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", author=" + author + ", createdTime="
                 + createdTime + ", modifiedTime=" + modifiedTime + "]";
     }
-    
-   
-    
 }

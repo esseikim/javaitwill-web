@@ -3,45 +3,52 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <!-- repository interface 정의  -->
-  <mapper namespace ="com.itwill.spring2.repository.ReplyRepository">
-            <select id="selectByPostId"  
-            resultType="com.itwill.spring2.domain.Reply"> <!-- executeQuery -> resultSet의 변환 타입 -->
-            select * from REPLIES
-            where POST_ID = #{post_id}
-            order by MODIFIED_TIME desc
-            </select>
-            
-            <!-- updateQuery의 리턴 값: 1(1개의 행 성공), 0 -->
-            <insert id="insert">
-                    insert into REPLIES (POST_ID, REPLY_TEXT, WRITER, CREATED_TIME, MODIFIED_TIME) 
-                    values (#{post_id}, #{reply_text}, #{writer}, systimestamp, systimestamp)
-                    <!-- 테이블을 만들 때 기본값을 설정하지 않거나, 기본값을 설정했는 지 모를 땐 위와같이  -->
-            </insert>
-            
-            <update id="update">
-                    update REPLIES
-                    set REPLY_TEXT = #{reply_text}, MODIFIED_TIME = systimestamp
-                    where ID = #{id}
-                    <!--#{}: MyBatis에서의 변수 역할  -->
-            </update>
-            
-            <delete id="delete">
-                        delete from REPLIES
-                         where ID = #{id}
-            </delete>
-            
-            <!-- id: primary key -> 중복되는 값x, null x -->
-            <select id="selectReplyCountWithPostId"
-                    resultType="java.lang.Long">
-                    select count(*) from REPLIES
-                    where POST_ID = #{post_id}
-            </select>
-            
-            <select id="selectById"
-               resultType="com.itwill.spring2.domain.Reply">
-               select * from REPLIES where ID = #{id}
-            </select>
-    
-  </mapper>
+
+<!-- ReplyRepository 인터페이스가 있는 패키지 이름과 인터페이스 이름. -->
+<mapper namespace="com.itwill.spring2.repository.ReplyRepository">
+	
+	<!-- updateQuery의 리턴 값: 1(1개의 행 성공), 0. -->
+	<insert id="insert">
+		insert into REPLIES (POST_ID, REPLY_TEXT, WRITER, CREATED_TIME,
+		MODIFIED_TIME)
+		values (#{post_id}, #{reply_text}, #{writer}, systimestamp, systimestamp)
+		<!-- 테이블을 만들 때 기본값을 설정하지 않거나, 기본값을 설정했는 지 모를 땐 위와 같이 모든 필드를 작성. -->
+	</insert>
+
+
+	<select id="selectByPostId"
+		resultType="com.itwill.spring2.domain.Reply"> <!-- executeQuery. -->
+		select * from REPLIES
+		where POST_ID = #{post_id}
+		order by MODIFIED_TIME desc
+	</select>
+
+
+	<select id="selectById"
+		resultType="com.itwill.spring2.domain.Reply">
+		select * from REPLIES where ID = #{id}
+	</select>
+
+
+	<delete id="delete">
+		delete from REPLIES
+		where ID = #{id}
+	</delete>
+
+
+	<update id="update">
+		update REPLIES
+		set REPLY_TEXT = #{reply_text}, MODIFIED_TIME = systimestamp
+		where ID = #{id}
+		<!-- #{}: MyBatis에서 변수의 역할. -->
+	</update>
+
+
+	<!-- id: PK, 중복x, null x. -->
+	<select id="selectReplyCountWithPostId"
+		resultType="java.lang.Long">
+		select count(*) from REPLIES
+		where POST_ID = #{post_id}
+	</select>
+
+</mapper>

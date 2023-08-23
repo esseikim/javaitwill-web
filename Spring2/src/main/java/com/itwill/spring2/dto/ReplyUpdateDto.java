@@ -10,5 +10,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ReplyUpdateDto {
-        private String replyText; // js의 파일에서 사용한 key값과 동일하게 설정
+    private String replyText; // js의 파일에서 사용한 key값과 동일하게 설정.
 }

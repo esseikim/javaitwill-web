@@ -4,20 +4,20 @@ import java.util.List;
 
 import com.itwill.spring2.domain.Reply;
 
-public interface ReplyRepository {
-    
-    List<Reply> selectByPostId(long postId); 
- // parameter가 reply-mapper.xml의 #{post_id}(== ? )를 채움.
-    
-    Reply selectById(long id); // 댓글 id를 주면 그 댓글 한 개를 리턴
-    
-    int insert(Reply reply);
-    
-    int update(Reply reply);
-    
-    int delete(long id);
-    
-    // 포스트에 달린 댓글의 개수를 리턴하는 메서드(Mapper 이용)
-    long selectReplyCountWithPostId(long postId);
+public interface ReplyRepository { // Mapper 이용.
+
+	int insert(Reply reply);
+
+	List<Reply> selectByPostId(long postId);
+
+	Reply selectById(long id); // 댓글 id > 해당 댓글 1개 리턴, cf) showUpdateModal.
+
+	int delete(long id);
+
+	int update(Reply reply); // updateReply.
+
+
+	// 포스트의 댓글 개수. PostService에서 호출, 포스트 목록페이지.
+	long selectReplyCountWithPostId(long postId);
 
 }
